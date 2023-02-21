@@ -4,20 +4,55 @@
  */
 package aplicacion.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import java.sql.Date;
 
 /**
  *
  * @author Cole
  */
+@Entity
 public class Missio implements TesteableEntity{
-
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idArchivoArcaico;
+    
+    @Column
     private String infoAventura;
+    
+    @Column
     private float poderMinimo;
+    
+    @Column
     private Date fechaColapso;
-    private boolean artefactoPerdido;
-            
+    
+    @Column
+    private boolean realizado;
+
+    public Missio(int idArchivoArcaico, String infoAventura, float poderMinimo, Date fechaColapso, boolean realizado) {
+        this.idArchivoArcaico = idArchivoArcaico;
+        this.infoAventura = infoAventura;
+        this.poderMinimo = poderMinimo;
+        this.fechaColapso = fechaColapso;
+        this.realizado = realizado;
+    }
+
+    public Missio(String infoAventura, float poderMinimo, Date fechaColapso, boolean realizado) {
+        this.infoAventura = infoAventura;
+        this.poderMinimo = poderMinimo;
+        this.fechaColapso = fechaColapso;
+        this.realizado = realizado;
+    }
+
+    public Missio() {
+    }
+    
+    
     @Override
     public Integer getAtributIdentificador() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

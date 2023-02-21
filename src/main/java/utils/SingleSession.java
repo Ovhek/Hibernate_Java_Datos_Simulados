@@ -4,7 +4,11 @@
  */
 package utils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 /**
  *
@@ -13,25 +17,31 @@ import org.hibernate.Session;
 public class SingleSession {
     private static Session sessio;
     private static SingleSession singleSession;
-
-    private SingleSession(Session sessio) {
-        this.sessio = sessio;
+    private static SessionFactory factory;
+    private static final Logger logger = LogManager.getLogger(SingleSession.class);
+    
+    private SingleSession() {
+        factory = HibernateUtils.getSessionFactory();
+        sessio =  factory.openSession();
     }
 
     public static SingleSession getInstance() {
         if(singleSession == null) {
-            singleSession = new SingleSession(sessio);
-        } else {
-            System.out.println("No se puede crear el objeto "+ sessio + " porque ya existe un objeto de la clase SingleSession");
+            singleSession = new SingleSession();
         }
         
         return singleSession;
     }
 
+    public static void closeSession(){
+        if(factory != null) factory.close();
+        if(sessio != null) sessio.close();
+    }
+    
     public Session getSessio() {
         return sessio;
     }
-
+    
     public void setSessio(Session sessio) {
         this.sessio = sessio;
     }
@@ -50,7 +60,7 @@ public class SingleSession {
         try {
             throw new CloneNotSupportedException();
         } catch (CloneNotSupportedException ex) {
-            System.out.println("No se puede clonar un objeto de la clase SingleSession");
+            logger.error("No se puede clonar un objeto de la clase SingleSession");
         }
         return null;
     }

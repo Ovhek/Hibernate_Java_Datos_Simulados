@@ -4,13 +4,26 @@
  */
 package aplicacion.model;
 
+import jakarta.persistence.Entity;
 import java.sql.Date;
 
 /**
  *
  * @author Cole
  */
+@Entity
 public class Transport extends Pilotada implements TesteableEntity{
+
+    public Transport(int identificadorArcano, String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {
+        super(identificadorArcano, modelo, mana, ultimaRecarga, magiaProhibida);
+    }
+
+    public Transport(String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {
+        super(modelo, mana, ultimaRecarga, magiaProhibida);
+    }
+
+    public Transport() {
+    }
 
     @Override
     public Integer getAtributIdentificador() {

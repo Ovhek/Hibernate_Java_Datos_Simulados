@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  
+  <Loggers>
+     <!-- Nivells de log:
+    OFF
+    ALL
+    FATAL
+    ERROR
+    WARN
+    INFO
+    DEBUG
+    TRACE
+       -->
+    
+    <!-- Per defecte --> 
+    <Root level="INFO">
+      <AppenderRef ref="Console" />     
+    </Root>
+    
+    <!-- Hibernate -->
+    <Logger name="org.hibernate" level="ERROR" additivity="false">
+      <AppenderRef ref="Console" />
+      <AppenderRef ref="File1" />     
+    </Logger>
+
+    <!-- Sentencies SQL -->
+    <Logger name="org.hibernate.SQL" level="ERRROR" additivity="false">
+      <AppenderRef ref="Console" />     
+      <AppenderRef ref="File2" />   
+    </Logger>
+ 
+  </Loggers>
+  
+  <Appenders>
+    
+    <!-- Sortida per pantalla -->
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+    </Console>
+
+    <!-- Sortida per fixter-->
+    <File name="File1" fileName="hibernateErrors.log">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+    </File>
+    
+    <!-- Sortida per fixter-->
+    <File name="File2" fileName="hibernateSQLInfo.log">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+    </File>
+    
+  </Appenders>
+  
+</Configuration>

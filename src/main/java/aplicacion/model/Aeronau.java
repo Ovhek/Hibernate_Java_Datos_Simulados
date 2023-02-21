@@ -4,16 +4,95 @@
  */
 package aplicacion.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import java.sql.Date;
 
 /**
  *
  * @author Cole
  */
-public class Aeronau {
-    private int identificadorArcano;
-    private String region;
-    private float mana;
-    private Date ultimaRecarga;
-    private boolean magiaProhibida;
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Aeronau {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected int identificadorArcano;
+    
+    @Column(nullable = false)
+    protected String modelo;
+    
+    @Column(nullable = false)
+    protected float mana;
+    
+    @Column(nullable = false)
+    protected Date ultimaRecarga;
+    
+    @Column(nullable = false)
+    protected boolean magiaProhibida;
+
+    public Aeronau(int identificadorArcano, String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {
+        this.identificadorArcano = identificadorArcano;
+        this.modelo = modelo;
+        this.mana = mana;
+        this.ultimaRecarga = ultimaRecarga;
+        this.magiaProhibida = magiaProhibida;
+    }
+
+    public Aeronau(String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {
+        this.modelo = modelo;
+        this.mana = mana;
+        this.ultimaRecarga = ultimaRecarga;
+        this.magiaProhibida = magiaProhibida;
+    }
+
+    public Aeronau() {
+    }
+
+    public int getIdentificadorArcano() {
+        return identificadorArcano;
+    }
+
+    public void setIdentificadorArcano(int identificadorArcano) {
+        this.identificadorArcano = identificadorArcano;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public float getMana() {
+        return mana;
+    }
+
+    public void setMana(float mana) {
+        this.mana = mana;
+    }
+
+    public Date getUltimaRecarga() {
+        return ultimaRecarga;
+    }
+
+    public void setUltimaRecarga(Date ultimaRecarga) {
+        this.ultimaRecarga = ultimaRecarga;
+    }
+
+    public boolean isMagiaProhibida() {
+        return magiaProhibida;
+    }
+
+    public void setMagiaProhibida(boolean magiaProhibida) {
+        this.magiaProhibida = magiaProhibida;
+    }
+    
+    
 }

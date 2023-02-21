@@ -4,13 +4,26 @@
  */
 package aplicacion.model;
 
+import jakarta.persistence.Entity;
 import java.sql.Date;
 
 /**
  *
  * @author Cole
  */
+@Entity
 public class Dron extends Autonoma implements TesteableEntity{
+
+    public Dron(int identificadorArcano, String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {
+        super(identificadorArcano, modelo, mana, ultimaRecarga, magiaProhibida);
+    }
+
+    public Dron(String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {
+        super(modelo, mana, ultimaRecarga, magiaProhibida);
+    }
+
+    public Dron() {
+    }
 
     @Override
     public Integer getAtributIdentificador() {

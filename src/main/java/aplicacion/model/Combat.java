@@ -4,14 +4,29 @@
  */
 package aplicacion.model;
 
+import jakarta.persistence.Entity;
 import java.sql.Date;
 
 /**
  *
  * @author Cole
  */
+@Entity
 public class Combat extends Aeronau implements TesteableEntity{
 
+    public Combat(int identificadorArcano, String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {
+        super(identificadorArcano, modelo, mana, ultimaRecarga, magiaProhibida);
+    }
+
+    public Combat(String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {
+        super(modelo, mana, ultimaRecarga, magiaProhibida);
+    }
+
+    public Combat() {
+    }
+
+    
+    
     @Override
     public Integer getAtributIdentificador() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

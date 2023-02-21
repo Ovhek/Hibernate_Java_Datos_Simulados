@@ -4,13 +4,26 @@
  */
 package aplicacion.model;
 
+import jakarta.persistence.Entity;
 import java.sql.Date;
 
 /**
  *
  * @author Cole
  */
+@Entity
 public class Pilot extends Soldat implements TesteableEntity{
+
+    public Pilot(int numColegiado, String tipoMagia, float poderMagico, Date fechaRenacimiento, boolean mercenario) {
+        super(numColegiado, tipoMagia, poderMagico, fechaRenacimiento, mercenario);
+    }
+
+    public Pilot(String tipoMagia, float poderMagico, Date fechaRenacimiento, boolean mercenario) {
+        super(tipoMagia, poderMagico, fechaRenacimiento, mercenario);
+    }
+
+    public Pilot() {
+    }
 
     @Override
     public Integer getAtributIdentificador() {
