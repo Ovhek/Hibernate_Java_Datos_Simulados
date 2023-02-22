@@ -5,6 +5,7 @@
 package aplicacion.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -13,6 +14,7 @@ import java.sql.Date;
  * @author Cole
  */
 @Entity
+@Table(name="transport")
 public class Transport extends Pilotada implements TesteableEntity, Serializable {
 
     private static final long serialVersionUID = 1L;

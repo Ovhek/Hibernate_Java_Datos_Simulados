@@ -6,6 +6,7 @@ package aplicacion.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -14,6 +15,7 @@ import java.sql.Date;
  * @author Cole
  */
 @Entity
+@Table(name="mecanic")
 public class Mecanic extends Soldat implements TesteableEntity, Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -20,6 +21,7 @@ import java.sql.Date;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(name="soldat")
 public abstract class Soldat implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
