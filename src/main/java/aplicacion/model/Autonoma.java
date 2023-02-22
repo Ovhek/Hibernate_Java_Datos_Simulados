@@ -7,6 +7,7 @@ package aplicacion.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -16,6 +17,7 @@ import java.sql.Date;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(name="autonoma")
 public abstract class Autonoma extends Aeronau implements Serializable {
     
     private static final long serialVersionUID = 1L;
