@@ -5,6 +5,7 @@
 package aplicacion.model;
 
 import jakarta.persistence.Entity;
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -12,8 +13,9 @@ import java.sql.Date;
  * @author Cole
  */
 @Entity
-public class Combat extends Aeronau implements TesteableEntity{
-
+public class Combat extends Aeronau implements TesteableEntity, Serializable{
+    
+    private static final long serialVersionUID = 1L;
     public Combat(int identificadorArcano, String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {
         super(identificadorArcano, modelo, mana, ultimaRecarga, magiaProhibida);
     }
