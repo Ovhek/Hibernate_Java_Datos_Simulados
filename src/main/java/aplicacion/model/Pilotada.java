@@ -3,10 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package aplicacion.model;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import java.io.Serial;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -15,14 +18,15 @@ import java.util.ArrayList;
  * @author Cole
  */
 @Entity
-public abstract class Pilotada extends Aeronau {
+public abstract class Pilotada extends Aeronau implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     @OneToOne(optional = true)
     private Pilot pilot;
-    
-    @OneToMany(mappedBy="pilotada", cascade=CascadeType.ALL, orphanRemoval=true)
+
+    @OneToMany(mappedBy = "pilotada", cascade = CascadeType.ALL, orphanRemoval = true)
     private ArrayList<Mecanic> mecanics = new ArrayList<>();
-    
+
     public Pilotada(int identificadorArcano, String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {
         super(identificadorArcano, modelo, mana, ultimaRecarga, magiaProhibida);
     }
@@ -33,5 +37,5 @@ public abstract class Pilotada extends Aeronau {
 
     public Pilotada() {
     }
-    
+
 }

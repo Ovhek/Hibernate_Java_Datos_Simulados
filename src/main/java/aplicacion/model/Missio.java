@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -16,8 +17,8 @@ import java.sql.Date;
  * @author Cole
  */
 @Entity
-public class Missio implements TesteableEntity{
-    
+public class Missio implements TesteableEntity, Serializable{
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idArchivoArcaico;

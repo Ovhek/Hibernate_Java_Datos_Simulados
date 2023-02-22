@@ -6,6 +6,7 @@ package aplicacion.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -13,7 +14,9 @@ import java.sql.Date;
  * @author Cole
  */
 @Entity
-public class Mecanic extends Soldat implements TesteableEntity{
+public class Mecanic extends Soldat implements TesteableEntity, Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     public Mecanic(int numColegiado, String tipoMagia, float poderMagico, Date fechaRenacimiento, boolean mercenario) {
         super(numColegiado, tipoMagia, poderMagico, fechaRenacimiento, mercenario);
@@ -36,7 +39,7 @@ public class Mecanic extends Soldat implements TesteableEntity{
 
     @ManyToOne(optional = false)
     private Pilotada pilotada;
-    
+
     @Override
     public Integer getAtributIdentificador() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -81,5 +84,5 @@ public class Mecanic extends Soldat implements TesteableEntity{
     public void setAtributBoolean(Boolean b) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }

@@ -7,6 +7,7 @@ package aplicacion.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -15,8 +16,9 @@ import java.sql.Date;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Autonoma extends Aeronau {
-
+public abstract class Autonoma extends Aeronau implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
     public Autonoma(int identificadorArcano, String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {
         super(identificadorArcano, modelo, mana, ultimaRecarga, magiaProhibida);
     }

@@ -5,6 +5,7 @@
 package aplicacion.model;
 
 import jakarta.persistence.Entity;
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -12,7 +13,9 @@ import java.sql.Date;
  * @author Cole
  */
 @Entity
-public class Pilot extends Soldat implements TesteableEntity{
+public class Pilot extends Soldat implements TesteableEntity, Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     public Pilot(int numColegiado, String tipoMagia, float poderMagico, Date fechaRenacimiento, boolean mercenario) {
         super(numColegiado, tipoMagia, poderMagico, fechaRenacimiento, mercenario);
@@ -69,5 +72,5 @@ public class Pilot extends Soldat implements TesteableEntity{
     public void setAtributBoolean(Boolean b) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }
