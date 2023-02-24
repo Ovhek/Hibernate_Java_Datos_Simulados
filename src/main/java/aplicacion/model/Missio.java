@@ -9,9 +9,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,6 +25,7 @@ import java.sql.Date;
 @Table(name="missio")
 public class Missio implements TesteableEntity, Serializable{
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idArchivoArcaico;
@@ -37,6 +42,13 @@ public class Missio implements TesteableEntity, Serializable{
     @Column
     private boolean realizado;
 
+    @ManyToMany
+    @JoinTable(
+      name = "missio_aeronau", 
+      joinColumns = @JoinColumn(name = "aeronau_id"), 
+      inverseJoinColumns = @JoinColumn(name = "missio_id"))
+    private ArrayList<Aeronau> aeronaus;
+    
     public Missio(int idArchivoArcaico, String infoAventura, float poderMinimo, Date fechaColapso, boolean realizado) {
         this.idArchivoArcaico = idArchivoArcaico;
         this.infoAventura = infoAventura;
