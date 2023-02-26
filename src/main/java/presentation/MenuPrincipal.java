@@ -4,13 +4,58 @@
  */
 package presentation;
 
+import java.util.Scanner;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import utils.HibernateUtils;
+
 /**
  *
  * @author Alex
  * Menú encargado de mostrar las tres opciones disponibles.
  */
 public abstract class MenuPrincipal {
-    public static int init(){
-        return 0;
+    
+    private static final Logger logger = LogManager.getLogger(MenuPrincipal.class);
+    
+    /**
+     * Inicializa el menu, Dando las opciones al usuario. Si la opción es incorrecta la función se repite indefinidamente.
+     */
+    public static void init(){
+        try {
+            Scanner sc = new Scanner(System.in);
+            
+            System.out.println("Selecciona una de las siguiente opciones sobre las clases: ");
+            System.out.println("1. Generar Clases");
+            System.out.println("2. Eliminar Clases");
+            System.out.println("3. Listar Clases");
+            System.out.println("4. Salir");
+            
+            int option = -1;
+            
+            if(sc.hasNextInt()) option = sc.nextInt();
+            
+            switch (option) {
+                case 1:
+                    MenuGenerar.init();
+                    break;
+                case 2:
+                    //TODO: Llamar al menu de eliminar
+                    break;
+                case 3:
+                    //TODO: Llamar al menu de listar.
+                    break;
+                case 4:
+                    logger.info("Hasta la próxima!!");
+                    System.exit(0);
+                    break;
+                default:
+                    throw new Exception("Opción no válida. Vuelve a indica una opción: ");
+            }
+            
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            init();
+        }
     }
 }

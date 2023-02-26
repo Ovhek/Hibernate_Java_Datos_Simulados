@@ -15,6 +15,7 @@ import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -29,10 +30,10 @@ public abstract class Pilotada extends Aeronau implements Serializable {
     
     @OneToOne(optional = true)
     @JoinColumn(name = "pilot_id")
-    private Pilot pilot;
+    private Pilot pilotAeronau;
 
     @OneToMany(mappedBy = "pilotada", cascade = CascadeType.ALL, orphanRemoval = true)
-    private ArrayList<Mecanic> mecanics = new ArrayList<>();
+    private List<Mecanic> mecanics = new ArrayList<>();
 
     public Pilotada(int identificadorArcano, String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {
         super(identificadorArcano, modelo, mana, ultimaRecarga, magiaProhibida);
@@ -45,15 +46,15 @@ public abstract class Pilotada extends Aeronau implements Serializable {
     public Pilotada() {
     }
 
-    public Pilot getPilot() {
-        return pilot;
+    public Pilot getPilotAeronau() {
+        return pilotAeronau;
     }
 
     public void setPilot(Pilot pilot) {
-        this.pilot = pilot;
+        this.pilotAeronau = pilot;
     }
 
-    public ArrayList<Mecanic> getMecanics() {
+    public List<Mecanic> getMecanics() {
         return mecanics;
     }
 

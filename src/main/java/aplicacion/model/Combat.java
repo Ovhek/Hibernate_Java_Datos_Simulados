@@ -15,7 +15,7 @@ import java.sql.Date;
  */
 @Entity
 @Table(name="combat")
-public class Combat extends Aeronau implements TesteableEntity, Serializable{
+public class Combat extends Pilotada implements TesteableEntity, Serializable{
     
     private static final long serialVersionUID = 1L;
     public Combat(int identificadorArcano, String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {
@@ -48,32 +48,32 @@ public class Combat extends Aeronau implements TesteableEntity, Serializable{
 
     @Override
     public Date getAtributDate() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return ultimaRecarga;
     }
 
     @Override
     public Boolean getAtributBoolean() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return magiaProhibida;
     }
 
     @Override
     public void setAtributString(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.modelo = s;
     }
 
     @Override
     public void setAtributFloat(Float f) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.mana = f;
     }
 
     @Override
     public void setAtributDate(Date d) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.ultimaRecarga = d;
     }
 
     @Override
     public void setAtributBoolean(Boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.magiaProhibida = b;
     }
     
 }

@@ -15,7 +15,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -47,7 +47,7 @@ public class Missio implements TesteableEntity, Serializable{
       name = "missio_aeronau", 
       joinColumns = @JoinColumn(name = "aeronau_id"), 
       inverseJoinColumns = @JoinColumn(name = "missio_id"))
-    private ArrayList<Aeronau> aeronaus;
+    private List<Aeronau> aeronaus;
     
     public Missio(int idArchivoArcaico, String infoAventura, float poderMinimo, Date fechaColapso, boolean realizado) {
         this.idArchivoArcaico = idArchivoArcaico;

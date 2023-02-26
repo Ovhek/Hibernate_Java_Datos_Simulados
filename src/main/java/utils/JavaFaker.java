@@ -26,6 +26,9 @@ public abstract class JavaFaker {
         faker = new Faker();
     }
 
+    private static Date utilDateToSqlDate(java.util.Date date){
+        return new java.sql.Date(date.getTime());
+    }
     /**
      * Genera un objeto de tipo Combat
      * @return Objeto de tipo Combat
@@ -34,7 +37,7 @@ public abstract class JavaFaker {
         initFaker();
         String modelo = faker.ancient().god() + faker.number().digits(4);
         float mana = (float) faker.number().randomDouble(2, 100, 1000);
-        Date ultimaRecarga = (Date) faker.date().past(5, TimeUnit.DAYS);
+        Date ultimaRecarga = utilDateToSqlDate(faker.date().past(5, TimeUnit.DAYS));
         boolean magiaProhibida = faker.bool().bool();
         return new Combat(modelo, mana, ultimaRecarga, magiaProhibida);
     }
@@ -47,7 +50,7 @@ public abstract class JavaFaker {
         initFaker();
         String modelo = faker.ancient().titan() + faker.number().digits(4);
         float mana = (float) faker.number().randomDouble(2, 1000, 10000);
-        Date ultimaRecarga = (Date) faker.date().past(5, TimeUnit.DAYS);
+        Date ultimaRecarga = utilDateToSqlDate(faker.date().past(5, TimeUnit.DAYS));
         boolean magiaProhibida = faker.bool().bool();
         return new Transport(modelo, mana, ultimaRecarga, magiaProhibida);
     }
@@ -60,7 +63,7 @@ public abstract class JavaFaker {
         initFaker();
         String modelo = faker.ancient().hero()+ faker.number().digits(4);
         float mana = (float) faker.number().randomDouble(2, 100, 500);
-        Date ultimaRecarga = (Date) faker.date().past(5, TimeUnit.DAYS);
+        Date ultimaRecarga = utilDateToSqlDate(faker.date().past(5, TimeUnit.DAYS));
         boolean magiaProhibida = faker.bool().bool();
         return new Dron(modelo, mana, ultimaRecarga, magiaProhibida);
     }
@@ -73,7 +76,7 @@ public abstract class JavaFaker {
         initFaker();
         String tipoMagia = faker.superhero().power();
         float poderMagico = (float) faker.number().randomDouble(2, 500, 2000);
-        Date fechaRenacimiento = (Date) faker.date().past(10, TimeUnit.DAYS);
+        Date fechaRenacimiento = utilDateToSqlDate(faker.date().past(10, TimeUnit.DAYS));
         boolean mercenario = faker.bool().bool();
         return new Pilot(tipoMagia, poderMagico, fechaRenacimiento, mercenario);
     }
@@ -86,7 +89,7 @@ public abstract class JavaFaker {
         initFaker();
         String tipoMagia = faker.superhero().power();
         float poderMagico = (float) faker.number().randomDouble(2, 5000, 10000);
-        Date fechaRenacimiento = (Date) faker.date().past(10, TimeUnit.DAYS);
+        Date fechaRenacimiento = utilDateToSqlDate(faker.date().past(10, TimeUnit.DAYS));
         boolean mercenario = faker.bool().bool();
         return new Mecanic(tipoMagia, poderMagico, fechaRenacimiento, mercenario);
     }
@@ -98,7 +101,7 @@ public abstract class JavaFaker {
     public static Missio generarMissio() {
         String infoAventura = faker.elderScrolls().quote();
         float poderMinimo = (float) faker.number().randomDouble(2, 500, 10000);
-        Date fechaColapso = (Date) faker.date().future(100, TimeUnit.DAYS);
+        Date fechaColapso = utilDateToSqlDate(faker.date().future(100, TimeUnit.DAYS));
         boolean realizado = faker.bool().bool();
         return new Missio(infoAventura, poderMinimo, fechaColapso, realizado);
     }

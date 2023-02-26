@@ -6,7 +6,9 @@
 package aplicacion;
 
 import aplicacion.model.Combat;
+import org.hibernate.SessionFactory;
 import presentation.MenuCredenciales;
+import presentation.MenuPrincipal;
 import utils.HibernateUtils;
 
 /**
@@ -17,6 +19,8 @@ public class M06uf2pracma {
 
     public static void main(String[] args) {
         MenuCredenciales.init();
+        
+        MenuPrincipal.init();
         
     }
 }
