@@ -6,18 +6,17 @@ package test;
  * and open the template in the editor.
  */
 
+import aplicacion.ClassFactory;
+import aplicacion.model.Aeronau;
+import aplicacion.model.Combat;
+import aplicacion.model.Dron;
+import aplicacion.model.Mecanic;
+import aplicacion.model.Missio;
+import aplicacion.model.Pilot;
+import aplicacion.model.Pilotada;
+import aplicacion.model.Transport;
 import java.util.ArrayList;
 import java.util.List;
-import main.ClassFactory;
-import main.SingleSession;
-import entitats.Combat;
-import entitats.Transport;
-import entitats.Mecanic;
-import entitats.Missio;
-import entitats.Pilot;
-import entitats.Dron;
-import entitats.Pilotada;
-import entitats.Aeronau;
 import org.hibernate.Session;
 import org.junit.jupiter.api.AfterAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,6 +26,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
+import utils.SingleSession;
 
 /**
  *

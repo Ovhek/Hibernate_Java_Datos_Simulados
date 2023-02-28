@@ -15,7 +15,7 @@ import java.sql.Date;
  */
 @Entity
 @Table(name="combat")
-public class Combat extends Aeronau implements TesteableEntity, Serializable{
+public class Combat extends Pilotada implements TesteableEntity, Serializable{
     
     private static final long serialVersionUID = 1L;
     public Combat(int identificadorArcano, String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {

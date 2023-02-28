@@ -6,6 +6,7 @@
 package aplicacion;
 
 import aplicacion.model.Combat;
+import presentation.Listar;
 import presentation.MenuCredenciales;
 import utils.HibernateUtils;
 
@@ -17,6 +18,6 @@ public class M06uf2pracma {
 
     public static void main(String[] args) {
         MenuCredenciales.init();
-        
+        Listar.menuListar();       
     }
 }
