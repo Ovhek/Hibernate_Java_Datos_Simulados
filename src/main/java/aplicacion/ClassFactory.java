@@ -51,6 +51,9 @@ public class ClassFactory implements TesteableFactory {
         return a;
     }
 
+    public ClassFactory() {
+    }
+
     @Override
     public Aeronau aeronauFactory(Class<?> tipus) {
         Aeronau aeronau = null;
