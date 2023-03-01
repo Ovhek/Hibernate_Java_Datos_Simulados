@@ -4,8 +4,10 @@
  */
 package presentation;
 
-import aplicacion.model.Missio;
-import aplicacion.model.Transport;
+import jakarta.persistence.Entity;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import jakarta.persistence.metamodel.EntityType;
 import jakarta.persistence.metamodel.PluralAttribute;
 import java.util.ArrayList;
@@ -16,7 +18,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.metamodel.model.domain.internal.EntityTypeImpl;
 import org.hibernate.metamodel.model.domain.internal.SingularAttributeImpl;
 import org.hibernate.query.Query;
 import utils.HibernateUtils;
@@ -36,17 +37,19 @@ public class Listar {
         Set<EntityType<?>> entidades = ss.getMetamodel().getEntities();
 
         System.out.println("Indica qué entidades quieres listar:");
-        for (EntityType<?> entidad : entidades) {
-            System.out.println(entidad.getName());
-        }
+        listarEntidades();
         String entrada = sc.nextLine();
+        System.out.println("Indica el id inicial:");
+        int idInicial = sc.nextInt();
+        System.out.println("Indica el id final:");
+        int idFinal = sc.nextInt();
         EntityType<?> ent = null;
         for (EntityType<?> entidad : entidades) {
-            if(entidad.getName().equals(entrada)){
+            if (entidad.getName().equals(entrada)) {
                 ent = entidad;
             }
         }
-        listarEntidad(ent);
+        listarEntidad(ent, idInicial, idFinal);
 
     }
 
@@ -56,39 +59,10 @@ public class Listar {
             ss.beginTransaction();
             // Guardar todas las entidades en una lista
             Set<EntityType<?>> entidades = ss.getMetamodel().getEntities();
-            List<String> listEntidadesAbstractas = new ArrayList<>();
-            List<String> listEntidades = new ArrayList<>();
+            for (EntityType<?> entidad : entidades) {
+                System.out.println(entidad.getName());
+            }
 
-            for (EntityType<?> entidad : entidades) {
-                logger.info("ENTIDAD::: " + entidad.getName());
-                if (((EntityTypeImpl) entidad).getJavaType().getSuperclass().toString().contains("Object")) {
-                    logger.info("ENTIDAD ABSTRACTA: " + ((EntityTypeImpl) entidad).getName());
-                    listEntidadesAbstractas.add(((EntityTypeImpl) entidad).getName());
-                }
-            }
-            for (EntityType<?> entidad : entidades) {
-                boolean bol = false;
-                logger.info("ENTIDAD::: " + entidad.getName());
-                if (((EntityTypeImpl) entidad).getJavaType().getSuperclass().toString().contains("model")) {
-                    logger.info("POSIBLE ENTIDAD NO ABSTRACTA: " + ((EntityTypeImpl) entidad).getName());
-                    for (String e : listEntidadesAbstractas) {
-                       logger.info("COMPARANDO CON E: " + e);
-                        if (!((EntityTypeImpl) entidad).getJavaType().getSuperclass().toString().contains(e) && !listEntidadesAbstractas.contains(entidad.getName())) {
-                            bol = true;
-                        } else {
-                            bol = false;
-                            //listEntidadesAbstractas.add(entidad.getName());
-                            break;
-                        }
-                    }
-                }
-                if (bol) {
-                    logger.info("ENTIDAD " + entidad.getName() + " AÑADIDA");
-                    listEntidades.add(((EntityTypeImpl) entidad).getName());
-                }
-                logger.info("SUPERCLASS:: " + ((EntityTypeImpl) entidad).getJavaType().getSuperclass());
-            }
-            System.out.println("ENTIDADES: " + listEntidades);
             ss.getTransaction().commit();
 
         } catch (HibernateException e) {
@@ -97,25 +71,28 @@ public class Listar {
         }
     }
 
-    public static void listarEntidad(EntityType<?> e) {
+    /*public static void listarEntidadv2(EntityType<?> e, int idInicial, int idFinal) {
+        CriteriaBuilder cb = ss.getCriteriaBuilder();
+        CriteriaQuery<Entity> cq = cb.createQuery(Entity.class);
+        Root<Entity> root = cq.from(Entity.class);
+        cq.select(e).where(cb.between(root.get("@id"), idInicial, idFinal));
+        List<Entity> results = ss.createQuery(cq).getResultList();
+    }*/
+
+    public static void listarEntidad(EntityType<?> e, int idInicial, int idFinal) {
 
         try {
             ss.beginTransaction();
-            
-            // Guardar todas las entidades en una lista
-            Set<EntityType<?>> entidades = ss.getMetamodel().getEntities();
-            List<String> listEntidades = new ArrayList<>();
 
-            Query query = ss.createQuery("from " + e);
+            Query query = ss.createQuery("FROM " + e + " WHERE idArchivoArcaico BETWEEN " + idInicial + " AND " + idFinal);
             logger.info("QUERY::: " + query.getQueryString());
-            
+
             /*List<Missio> select = new ArrayList<>();
 
             //select.addAll(query.list());
             select = query.list();*/
-
             List<EntityType> select = query.list();
-            
+
             ss.getTransaction().commit();
 
         } catch (HibernateException ex) {
@@ -129,13 +106,13 @@ public class Listar {
         //Set<?> listEntities;
         Set<PluralAttribute<?, ?, ?>> plural;
         Set<SingularAttributeImpl<?, ?>> single;
-        
+
         for (EntityType entidad : entidades) {
             plural = entidad.getDeclaredPluralAttributes();
             single = entidad.getSingularAttributes();
             System.out.println("\n****************************************\n");
             System.out.println(entidad.getName());
-            
+
             for (PluralAttribute<?, ?, ?> x : plural) {
                 System.out.println(x.getName() + ": " + x.getJavaType().getSimpleName());
             }

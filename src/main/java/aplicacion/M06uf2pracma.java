@@ -8,6 +8,7 @@ package aplicacion;
 import aplicacion.model.Combat;
 import presentation.Listar;
 import presentation.MenuCredenciales;
+import presentation.MenuPrincipal;
 import utils.HibernateUtils;
 
 /**

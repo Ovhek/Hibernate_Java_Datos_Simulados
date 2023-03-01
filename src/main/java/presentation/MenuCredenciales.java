@@ -24,7 +24,7 @@ public abstract class MenuCredenciales {
      * Inicializa el menú preguntado las credenciales. Si son correctas se genera la sessión de Hibernate.
      * @return Factoría de sesión de hibernate.
      */
-    public static SessionFactory init(){
+    public static void init(){
         try {
             Scanner sc = new Scanner(System.in);
             System.out.println("Introduce el nombre de la BBDD: ");
@@ -34,12 +34,12 @@ public abstract class MenuCredenciales {
             System.out.println("Introduce la contrasenya de la BBDD: ");
             String password = sc.nextLine();
         
+            logger.info("Realizando Conexión...");
             HibernateUtils.setSetSessionFactory(username, password, database);
         } catch (Exception e) {
             init();
         }
 
         logger.info("Conexión realizada correctamente.");
-        return HibernateUtils.getSessionFactory();
     }
 }

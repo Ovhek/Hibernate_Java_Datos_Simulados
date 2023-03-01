@@ -45,6 +45,7 @@ public abstract class Aeronau implements Serializable{
 
     @ManyToMany(mappedBy = "aeronaus")
     ArrayList<Missio> missions;
+    
     public Aeronau(int identificadorArcano, String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {
         this.identificadorArcano = identificadorArcano;
         this.modelo = modelo;

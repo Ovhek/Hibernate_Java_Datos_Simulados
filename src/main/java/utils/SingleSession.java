@@ -21,6 +21,7 @@ public class SingleSession {
     private static final Logger logger = LogManager.getLogger(SingleSession.class);
     
     private SingleSession() {
+        HibernateUtils.setSetSessionFactory("root", "1234", "test");
         factory = HibernateUtils.getSessionFactory();
         sessio =  factory.openSession();
     }
