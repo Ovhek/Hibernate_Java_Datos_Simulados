@@ -8,7 +8,6 @@ import aplicacion.model.Aeronau;
 import aplicacion.model.Combat;
 import aplicacion.model.Mecanic;
 import aplicacion.model.Missio;
-import aplicacion.model.Autonoma;
 import aplicacion.model.Pilot;
 import aplicacion.model.Pilotada;
 import aplicacion.ClassFactory;
