@@ -77,7 +77,7 @@ public class ClassFactory implements TesteableFactory {
 
             //Vamos eliminando la primera mission de la lista de misiones 
             //de la aeronave hasta que queden solo 2 misiones.
-            //tambien eliminamos de la mision la aeronave
+            //tambien eliminamos de la mision(eliminada) la aeronave
             while (missions.size() > 2) {
                 missions.get(0).getAeronaus().remove(a);
                 missions.remove(0);
