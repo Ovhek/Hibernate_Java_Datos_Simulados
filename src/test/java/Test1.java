@@ -350,10 +350,10 @@ public class Test1 {
         missions.stream().forEach(x -> session.persist(x));
         
         //enllacem aeronaus a missió
-        //missions.get(0).setAeronaus(escuadrilla1);
+        missions.get(0).setAeronaus(escuadrilla1);
         
         //enllacem aeronaus a missió
-        //missions.get(1).setAeronaus(escuadrilla1);
+        missions.get(1).setAeronaus(escuadrilla1);
         
         //persistim a BBDD
         session.getTransaction().commit();
@@ -363,14 +363,14 @@ public class Test1 {
         session.refresh(m1);
         
         //verifiquem misió ---> aeronaus
-        //assertEquals((m1.getAeronaus().size() == 8), true);
+        assertEquals((m1.getAeronaus().size() == 8), true);
         
         //recuperem aeronau
         Dron a1 = (Dron)session.get(Dron.class, ((Dron)(escuadrilla1.get(0))).getAtributIdentificador());
         session.refresh(a1);
         
         //verifiquem aeronau ---> misió
-        //assertEquals((a1.getMissions().size() == 2), true);
+        assertEquals((a1.getMissions().size() == 2), true);
     }
     
     @Test
