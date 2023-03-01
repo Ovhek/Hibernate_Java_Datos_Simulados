@@ -4,6 +4,7 @@
  */
 package presentation;
 
+import aplicacion.model.Missio;
 import jakarta.persistence.Entity;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -21,6 +22,7 @@ import org.hibernate.Session;
 import org.hibernate.metamodel.model.domain.internal.SingularAttributeImpl;
 import org.hibernate.query.Query;
 import utils.HibernateUtils;
+import utils.JavaFaker;
 import utils.SingleSession;
 
 /**
@@ -43,67 +45,68 @@ public class Listar {
         int idInicial = sc.nextInt();
         System.out.println("Indica el id final:");
         int idFinal = sc.nextInt();
-        EntityType<?> ent = null;
+        /*EntityType<?> ent = null;
         for (EntityType<?> entidad : entidades) {
             if (entidad.getName().equals(entrada)) {
                 ent = entidad;
             }
-        }
-        listarEntidad(ent, idInicial, idFinal);
+        }*/
+        listarEntidad(entrada, idInicial, idFinal);
 
     }
 
+    /**
+     * Listar todas las Entidades
+     */
     public static void listarEntidades() {
-
         try {
-            ss.beginTransaction();
             // Guardar todas las entidades en una lista
             Set<EntityType<?>> entidades = ss.getMetamodel().getEntities();
             for (EntityType<?> entidad : entidades) {
                 System.out.println(entidad.getName());
             }
-
-            ss.getTransaction().commit();
-
+            System.out.println();
         } catch (HibernateException e) {
-            ss.getTransaction().rollback();
             e.printStackTrace();
         }
     }
 
-    /*public static void listarEntidadv2(EntityType<?> e, int idInicial, int idFinal) {
-        CriteriaBuilder cb = ss.getCriteriaBuilder();
-        CriteriaQuery<Entity> cq = cb.createQuery(Entity.class);
-        Root<Entity> root = cq.from(Entity.class);
-        cq.select(e).where(cb.between(root.get("@id"), idInicial, idFinal));
-        List<Entity> results = ss.createQuery(cq).getResultList();
-    }*/
-
-    public static void listarEntidad(EntityType<?> e, int idInicial, int idFinal) {
-
+    /**
+     * Listar todas las entidades que estén entre el rango de id's elegido por
+     * el usuario anteriormente
+     *
+     * @param s
+     * @param idInicial
+     * @param idFinal
+     */
+    public static void listarEntidad(String s, int idInicial, int idFinal) {
         try {
-            ss.beginTransaction();
-
-            Query query = ss.createQuery("FROM " + e + " WHERE idArchivoArcaico BETWEEN " + idInicial + " AND " + idFinal);
-            logger.info("QUERY::: " + query.getQueryString());
-
-            /*List<Missio> select = new ArrayList<>();
-
-            //select.addAll(query.list());
-            select = query.list();*/
-            List<EntityType> select = query.list();
-
-            ss.getTransaction().commit();
+            Set<EntityType<?>> entidades = ss.getMetamodel().getEntities();
+            for (EntityType<?> entidad : entidades) {
+                System.out.println(entidad.getName());
+            }
+            
+            System.out.println();
+            
+            // Buscar los registros de la tabla de Missio
+            List<Missio> llista = ss.createQuery("from Missio", Missio.class).list();
+            for(Missio ms: llista) {
+                System.out.println("MISSIO:: " + ms.toString());
+            }
+            logger.info("LLISTA::: " + llista);
+            
+            // Filtrar los registros por rango de Id's
+            List<Missio> listaDestino = llista.stream().filter(x -> x.getAtributIdentificador() >= idInicial && x.getAtributIdentificador() <= idFinal).toList();
+            logger.info("LISTA FILTRADA POR ID:::" + listaDestino);
 
         } catch (HibernateException ex) {
-            ss.getTransaction().rollback();
             ex.printStackTrace();
         }
     }
 
+    // Listar los Atributos de cada Entidad
     public static void listarAtributos() {
         Set<EntityType<?>> entidades = ss.getMetamodel().getEntities();
-        //Set<?> listEntities;
         Set<PluralAttribute<?, ?, ?>> plural;
         Set<SingularAttributeImpl<?, ?>> single;
 
