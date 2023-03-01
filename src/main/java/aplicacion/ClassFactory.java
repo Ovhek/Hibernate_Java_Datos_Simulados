@@ -25,11 +25,13 @@ public class ClassFactory implements TesteableFactory {
 
     @Override
     public Aeronau addMecanicsToPilotada(List<Soldat> lo, Pilotada p) throws Exception {
-        if(lo.size() < 0 || lo.size() > 2) throw new Exception("El valor debe estar entre 0 y 2");
+        if (lo.size() < 0 || lo.size() > 2) {
+            throw new Exception("El valor debe estar entre 0 y 2");
+        }
         ArrayList<Mecanic> mecanic = new ArrayList<>();
         lo.forEach(e -> {
-            ((Mecanic)e).setPilotada(p);
-            mecanic.add((Mecanic)e);
+            ((Mecanic) e).setPilotada(p);
+            mecanic.add((Mecanic) e);
         });
         p.setMecanics(mecanic);
         return p;
@@ -37,7 +39,20 @@ public class ClassFactory implements TesteableFactory {
 
     @Override
     public Aeronau addMissionsToAeronau(List<Missio> lm, Aeronau a) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (a.getMissions() != null) {
+            ArrayList<Missio> missions = a.getMissions();
+            if (lm.size() > 2) {
+                throw new Exception("Como maximo se pueden añadir 2 misiones");
+            }
+            missions.addAll(lm);
+            while(missions.size()>2){
+                missions.remove(0);
+            }
+        } else {
+            a.setMissions(lm);
+        }
+
+        return a;
     }
 
     @Override

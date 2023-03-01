@@ -22,33 +22,34 @@ import java.util.List;
  * @author Cole
  */
 @Entity
-@Table(name="missio")
-public class Missio implements TesteableEntity, Serializable{
+@Table(name = "missio")
+public class Missio implements TesteableEntity, Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idArchivoArcaico;
-    
+
     @Column
     private String infoAventura;
-    
+
     @Column
     private float poderMinimo;
-    
+
     @Column
     private Date fechaColapso;
-    
+
     @Column
     private boolean realizado;
 
     @ManyToMany
     @JoinTable(
-      name = "missio_aeronau", 
-      joinColumns = @JoinColumn(name = "aeronau_id"), 
-      inverseJoinColumns = @JoinColumn(name = "missio_id"))
+            name = "missio_aeronau",
+            joinColumns = @JoinColumn(name = "aeronau_id"),
+            inverseJoinColumns = @JoinColumn(name = "missio_id"))
     private List<Aeronau> aeronaus;
-    
+
     public Missio(int idArchivoArcaico, String infoAventura, float poderMinimo, Date fechaColapso, boolean realizado) {
         this.idArchivoArcaico = idArchivoArcaico;
         this.infoAventura = infoAventura;
@@ -66,51 +67,98 @@ public class Missio implements TesteableEntity, Serializable{
 
     public Missio() {
     }
-    
-    
+
+    public int getIdArchivoArcaico() {
+        return idArchivoArcaico;
+    }
+
+    public void setIdArchivoArcaico(int idArchivoArcaico) {
+        this.idArchivoArcaico = idArchivoArcaico;
+    }
+
+    public String getInfoAventura() {
+        return infoAventura;
+    }
+
+    public void setInfoAventura(String infoAventura) {
+        this.infoAventura = infoAventura;
+    }
+
+    public float getPoderMinimo() {
+        return poderMinimo;
+    }
+
+    public void setPoderMinimo(float poderMinimo) {
+        this.poderMinimo = poderMinimo;
+    }
+
+    public Date getFechaColapso() {
+        return fechaColapso;
+    }
+
+    public void setFechaColapso(Date fechaColapso) {
+        this.fechaColapso = fechaColapso;
+    }
+
+    public boolean isRealizado() {
+        return realizado;
+    }
+
+    public void setRealizado(boolean realizado) {
+        this.realizado = realizado;
+    }
+
+    public List<Aeronau> getAeronaus() {
+        return aeronaus;
+    }
+
+    public void setAeronaus(List<Aeronau> aeronaus) {
+        this.aeronaus = aeronaus;
+    }
+
     @Override
     public Integer getAtributIdentificador() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return getIdArchivoArcaico();
     }
 
     @Override
     public String getAtributString() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return getInfoAventura();
     }
 
     @Override
     public Float getAtributFloat() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return getPoderMinimo();
     }
 
     @Override
     public Date getAtributDate() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return getFechaColapso();
     }
 
     @Override
     public Boolean getAtributBoolean() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return isRealizado();
     }
 
     @Override
     public void setAtributString(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        setInfoAventura(s);
     }
 
     @Override
     public void setAtributFloat(Float f) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        setPoderMinimo(f);
     }
 
     @Override
     public void setAtributDate(Date d) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        setFechaColapso(d);
     }
 
     @Override
     public void setAtributBoolean(Boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        setRealizado(b);
     }
-    
+
 }
