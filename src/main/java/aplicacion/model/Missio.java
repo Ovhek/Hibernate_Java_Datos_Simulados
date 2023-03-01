@@ -26,7 +26,7 @@ import java.util.List;
 public class Missio implements TesteableEntity, Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idArchivoArcaico;
@@ -49,7 +49,7 @@ public class Missio implements TesteableEntity, Serializable {
     joinColumns = @JoinColumn(name = "aeronau_id"), 
     inverseJoinColumns = @JoinColumn(name = "missio_id"))
     private List<Aeronau> aeronaus;
-    
+
     public Missio(int idArchivoArcaico, String infoAventura, float poderMinimo, Date fechaColapso, boolean realizado) {
         this.idArchivoArcaico = idArchivoArcaico;
         this.infoAventura = infoAventura;

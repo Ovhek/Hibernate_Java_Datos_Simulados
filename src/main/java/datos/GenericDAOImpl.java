@@ -36,7 +36,7 @@ public abstract class GenericDAOImpl<Entidad, ID extends Serializable> implement
      * @return sesión de Hibernate
      */
     private Session getSession() {
-        return SingleSession.getSingleSession().getSessio();
+        return SingleSession.getInstance().getSessio();
     }
 
     public void guardar(Entidad entidad) {

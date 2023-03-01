@@ -5,11 +5,9 @@
 
 package aplicacion;
 
-import aplicacion.model.Combat;
-import org.hibernate.SessionFactory;
+import presentation.Listar;
 import presentation.MenuCredenciales;
 import presentation.MenuPrincipal;
-import utils.HibernateUtils;
 
 /**
  *
@@ -21,6 +19,8 @@ public class M06uf2pracma {
         MenuCredenciales.init();
         
         MenuPrincipal.init();
+        
+        Listar.listarEntidades();
         
     }
 }

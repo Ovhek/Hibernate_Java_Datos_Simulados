@@ -16,6 +16,7 @@ import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -44,7 +45,7 @@ public abstract class Aeronau implements Serializable{
     protected boolean magiaProhibida;
 
     @ManyToMany(mappedBy = "aeronaus")
-    ArrayList<Missio> missions;
+    protected ArrayList<Missio> missions;
     
     public Aeronau(int identificadorArcano, String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {
         this.identificadorArcano = identificadorArcano;
@@ -83,6 +84,15 @@ public abstract class Aeronau implements Serializable{
     public float getMana() {
         return mana;
     }
+
+    public ArrayList<Missio> getMissions() {
+        return missions;
+    }
+
+    public void setMissions(List<Missio> missions) {
+        this.missions = (ArrayList<Missio>) missions;
+    }
+    
 
     public void setMana(float mana) {
         this.mana = mana;
