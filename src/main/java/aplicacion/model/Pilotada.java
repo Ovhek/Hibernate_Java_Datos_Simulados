@@ -8,13 +8,14 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -26,11 +27,13 @@ import java.util.ArrayList;
 public abstract class Pilotada extends Aeronau implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @OneToOne(optional = true)
-    private Pilot pilot;
+    @JoinColumn(name = "pilot_id")
+    private Pilot pilotAeronau;
 
     @OneToMany(mappedBy = "pilotada", cascade = CascadeType.ALL, orphanRemoval = true)
-    private ArrayList<Mecanic> mecanics = new ArrayList<>();
+    private List<Mecanic> mecanics = new ArrayList<>();
 
     public Pilotada(int identificadorArcano, String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {
         super(identificadorArcano, modelo, mana, ultimaRecarga, magiaProhibida);
@@ -41,6 +44,22 @@ public abstract class Pilotada extends Aeronau implements Serializable {
     }
 
     public Pilotada() {
+    }
+
+    public Pilot getPilotAeronau() {
+        return pilotAeronau;
+    }
+
+    public void setPilot(Pilot pilot) {
+        this.pilotAeronau = pilot;
+    }
+
+    public List<Mecanic> getMecanics() {
+        return mecanics;
+    }
+
+    public void setMecanics(ArrayList<Mecanic> mecanics) {
+        this.mecanics = mecanics;
     }
 
 }

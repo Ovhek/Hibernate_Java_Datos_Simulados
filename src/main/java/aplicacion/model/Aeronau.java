@@ -11,9 +11,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,7 +23,7 @@ import java.sql.Date;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name="stock")
+@Table(name="aeronau")
 public abstract class Aeronau implements Serializable{
     private static final long serialVersionUID = 1L;
     
@@ -41,6 +43,9 @@ public abstract class Aeronau implements Serializable{
     @Column(nullable = false)
     protected boolean magiaProhibida;
 
+    @ManyToMany(mappedBy = "aeronaus")
+    ArrayList<Missio> missions;
+    
     public Aeronau(int identificadorArcano, String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {
         this.identificadorArcano = identificadorArcano;
         this.modelo = modelo;
