@@ -1,18 +1,18 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-import aplicacion.ClassFactory;
 import aplicacion.model.Aeronau;
 import aplicacion.model.Combat;
-import aplicacion.model.Dron;
 import aplicacion.model.Mecanic;
 import aplicacion.model.Missio;
 import aplicacion.model.Pilot;
 import aplicacion.model.Pilotada;
+import aplicacion.ClassFactory;
 import aplicacion.model.Transport;
+import aplicacion.model.Dron;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
@@ -30,7 +30,7 @@ import utils.SingleSession;
  *
  * @author manel
  * 
- * versió 22_23 1.1
+ * versió 22_23 1.2
  */
 public class Test1 {
     
@@ -198,7 +198,6 @@ public class Test1 {
        System.out.println("TEST: " + testInfo.getDisplayName());
        
        //dos objectes "random" han de tenir atributs diferents
-       //ESTÁ MAL, ESTA PASANDO UN COMBAT.CLASS PERO TIENE QUE SER DE TIPO SOLDAT ??
        Pilot o1 = (Pilot) factory.soldatFactory(Pilot.class);
        Pilot o2 = (Pilot) factory.soldatFactory(Pilot.class);
        assertTrue(! o1.getAtributString().equals(o2.getAtributString()));

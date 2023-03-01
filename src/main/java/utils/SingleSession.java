@@ -4,6 +4,7 @@
  */
 package utils;
 
+import com.mysql.cj.conf.PropertyKey;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -11,7 +12,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 /**
- *
+ * Clase encargada de generar una única sesión para Hibernate
+ * IMPORTANTE: AÑADIR USERNAME, PASSWORD Y DATABASE EN LA FUNCIÓN init()
  * @author ivan
  */
 public class SingleSession {
@@ -21,11 +23,22 @@ public class SingleSession {
     private static final Logger logger = LogManager.getLogger(SingleSession.class);
     
     private SingleSession() {
+        init();
+    }
+
+    /**
+     * Función que inicializa la sessión creado una factoria sobre los datos de acceso a la DB
+     */
+    private void init(){
         HibernateUtils.setSetSessionFactory("root", "1234", "test");
         factory = HibernateUtils.getSessionFactory();
         sessio =  factory.openSession();
     }
-
+    
+    /**
+     * Función encargada de crear una instancia de la clase. Si ya existe devuelve la misma, si no la crea.
+     * @return 
+     */
     public static SingleSession getInstance() {
         if(singleSession == null) {
             singleSession = new SingleSession();
@@ -34,26 +47,33 @@ public class SingleSession {
         return singleSession;
     }
 
+    /**
+     * Función encargada de cerrar la sesión.
+     */
     public static void closeSession(){
         if(factory != null) factory.close();
         if(sessio != null) sessio.close();
     }
     
+    /**
+     * Función encargada de obtener la sesión. Si la sesión ya está abierta, la cierra y la vuelve a crear.
+     * @return Sesión a la BD
+     */
     public Session getSessio() {
+        if(sessio.getTransaction().isActive()){
+            closeSession();
+            init();
+        }
         return sessio;
     }
     
+    /**
+     * Función encargada de asignar una sesión.
+     * @param sessio 
+     */
     public void setSessio(Session sessio) {
         this.sessio = sessio;
     }
-
-    public static SingleSession getSingleSession() {
-        return singleSession;
-    }
-
-    public static void setSingleSession(SingleSession singleSession) {
-        SingleSession.singleSession = singleSession;
-    } 
     
     //Sobreescribimos el método clone, para que no se pueda clonar un objeto de esta clase
     @Override

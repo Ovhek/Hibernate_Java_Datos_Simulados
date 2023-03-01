@@ -15,6 +15,7 @@ import aplicacion.model.Soldat;
 import aplicacion.model.Transport;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import utils.JavaFaker;
 
 /**
@@ -37,7 +38,20 @@ public class ClassFactory implements TesteableFactory {
 
     @Override
     public Aeronau addMissionsToAeronau(List<Missio> lm, Aeronau a) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (a.getMissions() != null) {
+            List<Missio> missions = a.getMissions();
+            if (lm.size() > 2) {
+                throw new Exception("Como maximo se pueden añadir 2 misiones");
+            }
+            missions.addAll(lm);
+            while(missions.size()>2){
+                missions.remove(0);
+            }
+        } else {
+            a.setMissions(lm);
+        }
+
+        return a;
     }
 
     @Override
@@ -49,6 +63,9 @@ public class ClassFactory implements TesteableFactory {
     public Aeronau addPilotToAeronauPilotada(Pilot p, Pilotada a) throws Exception {
         a.setPilot(p);
         return a;
+    }
+
+    public ClassFactory() {
     }
 
     @Override
@@ -98,12 +115,22 @@ public class ClassFactory implements TesteableFactory {
 
     @Override
     public Soldat soldatFactory(Class<?> tipus) {
+        Random rnd = new Random();
+        int rand = rnd.nextInt(2);
+        Pilotada pilotada = null;
+        
+        if(rand == 0) pilotada = JavaFaker.generarCombat();
+        else pilotada = JavaFaker.generarTransport();
+        
+        
         Soldat soldat = null;
         if (tipus.equals(Mecanic.class)) {
             soldat = JavaFaker.generarMecanic();
+            ((Mecanic)soldat).setPilotada(pilotada);
         } else if (tipus.equals(Pilot.class)) {
             soldat = JavaFaker.generarPilot();
         }
+        
         return soldat;
     }
 
