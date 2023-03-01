@@ -4,15 +4,19 @@
  */
 package utils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import presentation.MenuCredenciales;
 
 /**
  * Función de utilidad para crear una sesión de hibernate según los datos
  * proporcionados por el usuario.
  */
 public abstract class HibernateUtils {
-
+    private static final Logger logger = LogManager.getLogger(HibernateUtils.class);
     private static SessionFactory sessionFactory;
 
     /**
@@ -26,13 +30,14 @@ public abstract class HibernateUtils {
             Configuration configuration = new Configuration();
             configuration.setProperty("hibernate.connection.username", username);
             configuration.setProperty("hibernate.connection.password", password);
-            configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/" + database);
+            configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/" + database+"?createDatabaseIfNotExist=true");
             configuration.setProperty("hibernate.hbm2ddl.auto", "update");
             configuration.configure();
 
             sessionFactory = configuration.buildSessionFactory();
-        } catch (Exception e) {
-            
+        } catch (HibernateException e) {
+            logger.error(": "+e.getMessage());
+            throw e;
         }
 
     }
