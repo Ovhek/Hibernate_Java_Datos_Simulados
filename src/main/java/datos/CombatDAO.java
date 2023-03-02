@@ -4,15 +4,15 @@
  */
 package datos;
 
-import java.io.Serializable;
+import aplicacion.model.Combat;
 
 /**
  * DAO para la clase de combate. Extiende del GenericDAOImpl
  */
-public class CombatDAO extends GenericDAOImpl<CombatDAO, Integer>{
+public class CombatDAO extends GenericDAOImpl<Combat, Integer>{
     
-    public CombatDAO(Class<CombatDAO> clase) {
-        super(CombatDAO.class);
+    public CombatDAO() {
+        super(Combat.class);
     }
     
 }

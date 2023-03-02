@@ -4,15 +4,15 @@
  */
 package datos;
 
-import java.io.Serializable;
+import aplicacion.model.Pilot;
 
 /**
  * DAO para la clase de pìlot. Extiende del GenericDAOImpl
  */
-public class PilotDAO extends GenericDAOImpl<PilotDAO, Integer>{
+public class PilotDAO extends GenericDAOImpl<Pilot, Integer>{
     
-    public PilotDAO(Class<PilotDAO> clase) {
-        super(PilotDAO.class);
+    public PilotDAO() {
+        super(Pilot.class);
     }
     
 }
