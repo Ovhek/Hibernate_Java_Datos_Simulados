@@ -14,6 +14,7 @@ import aplicacion.model.Pilotada;
 import aplicacion.model.Soldat;
 import aplicacion.model.Transport;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import utils.JavaFaker;
@@ -51,6 +52,11 @@ public class ClassFactory implements TesteableFactory {
         // En caso de que la mision tenga mas de 8, se elimina de la lista,
         //en caso contrario se le asigna la aeronave
         lm.forEach(m -> {
+            //Si aeronaves es null se setean.
+            if(m.getAeronaus() == null) {
+                ArrayList<Aeronau> aeronaus = new ArrayList<>();
+                m.setAeronaus(aeronaus);
+            }
             if (m.getAeronaus().size() > 7) {
                 lm.remove(m);
             } else {
@@ -92,6 +98,7 @@ public class ClassFactory implements TesteableFactory {
     @Override
     public Aeronau addPilotToAeronauPilotada(Pilot p, Pilotada a) throws Exception {
         a.setPilot(p);
+        p.setPilotada(a);
         return a;
     }
 

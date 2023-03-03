@@ -4,6 +4,7 @@
  */
 package datos;
 
+import jakarta.persistence.EntityManager;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +44,10 @@ public abstract class GenericDAOImpl<Entidad, ID extends Serializable> implement
         Session session = getSession();
         Transaction tx = null;
         try {
+            
             tx = session.beginTransaction();
-            session.persist(entidad);
+            if (session.contains(entidad)) session.merge(entidad);
+            else session.persist(entidad);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {

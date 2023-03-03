@@ -4,6 +4,7 @@
  */
 package aplicacion.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,7 +45,7 @@ public abstract class Aeronau implements Serializable{
     @Column(nullable = false)
     protected boolean magiaProhibida;
 
-    @ManyToMany(mappedBy = "aeronaus")
+    @ManyToMany(mappedBy = "aeronaus", cascade = CascadeType.ALL)
     protected List<Missio> missions;
     
     public Aeronau(int identificadorArcano, String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {

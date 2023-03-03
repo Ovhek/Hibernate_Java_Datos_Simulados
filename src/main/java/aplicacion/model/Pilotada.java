@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -28,11 +29,10 @@ public abstract class Pilotada extends Aeronau implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    @OneToOne(optional = true)
-    @JoinColumn(name = "pilot_id")
+    @OneToOne(optional = true,cascade = CascadeType.ALL)
     private Pilot pilotAeronau;
 
-    @OneToMany(mappedBy = "pilotada", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "pilotada", cascade = CascadeType.ALL)
     private List<Mecanic> mecanics = new ArrayList<>();
 
     public Pilotada(int identificadorArcano, String modelo, float mana, Date ultimaRecarga, boolean magiaProhibida) {

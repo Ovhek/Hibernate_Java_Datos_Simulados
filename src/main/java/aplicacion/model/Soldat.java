@@ -26,7 +26,7 @@ public abstract class Soldat implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int numColegiado;
+    protected Integer numColegiado;
     @Column
     protected String tipoMagia;
     @Column

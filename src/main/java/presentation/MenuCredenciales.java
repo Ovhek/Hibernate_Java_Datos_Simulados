@@ -35,7 +35,7 @@ public abstract class MenuCredenciales {
             String password = sc.nextLine();
         
             logger.info("Realizando Conexión...");
-            HibernateUtils.setSetSessionFactory(username, password, database);
+            HibernateUtils.getInstance().setSetSessionFactory(username, password, database);
         } catch (Exception e) {
             init();
         }

@@ -18,7 +18,7 @@ public class M06uf2pracma {
         MenuCredenciales.init();
 
         MenuPrincipal.init();
-        Listar.listarEntidades();
+        //Listar.listarEntidades();
     }
 
 }

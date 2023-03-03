@@ -15,17 +15,26 @@ import presentation.MenuCredenciales;
  * Función de utilidad para crear una sesión de hibernate según los datos
  * proporcionados por el usuario.
  */
-public abstract class HibernateUtils {
+public class HibernateUtils {
     private static final Logger logger = LogManager.getLogger(HibernateUtils.class);
     private static SessionFactory sessionFactory;
-
+    
+    private static HibernateUtils instance;
+    
+    public static HibernateUtils getInstance() {
+        if(instance == null) {
+            instance = new HibernateUtils();
+        }
+        return instance;
+    }
+        
     /**
      * Crea la configuración de Hibernate con el usuario, contraseña y base de datos.
      * @param username usuario
      * @param password contraseña
      * @param database base de datos.
      */
-    public static void setSetSessionFactory(String username, String password, String database) {
+    public void setSetSessionFactory(String username, String password, String database) {
         try {
             Configuration configuration = new Configuration();
             configuration.setProperty("hibernate.connection.username", username);
@@ -42,7 +51,7 @@ public abstract class HibernateUtils {
 
     }
     
-    public static SessionFactory getSessionFactory() {
+    public SessionFactory getSessionFactory() {
         return sessionFactory;
     }
     

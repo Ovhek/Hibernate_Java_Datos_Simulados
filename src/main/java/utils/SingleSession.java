@@ -30,8 +30,8 @@ public class SingleSession {
      * Función que inicializa la sessión creado una factoria sobre los datos de acceso a la DB
      */
     private void init(){
-        HibernateUtils.setSetSessionFactory("root", "1234", "test");
-        factory = HibernateUtils.getSessionFactory();
+        if(HibernateUtils.getInstance().getSessionFactory() == null) HibernateUtils.getInstance().setSetSessionFactory("root", "1234", "test");
+        factory = HibernateUtils.getInstance().getSessionFactory();
         sessio =  factory.openSession();
     }
     
@@ -51,7 +51,6 @@ public class SingleSession {
      * Función encargada de cerrar la sesión.
      */
     public static void closeSession(){
-        if(factory != null) factory.close();
         if(sessio != null) sessio.close();
     }
     
@@ -64,6 +63,7 @@ public class SingleSession {
             closeSession();
             init();
         }
+        if(!sessio.isOpen()) sessio = factory.openSession();
         return sessio;
     }
     

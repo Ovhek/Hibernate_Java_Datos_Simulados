@@ -5,7 +5,6 @@
 package aplicacion.model;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -22,7 +21,7 @@ public class Mecanic extends Soldat implements TesteableEntity, Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = CascadeType.ALL)
     private Pilotada pilotada;
 
     public Mecanic(int numColegiado, String tipoMagia, float poderMagico, Date fechaRenacimiento, boolean mercenario) {

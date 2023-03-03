@@ -4,6 +4,7 @@
  */
 package aplicacion.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class Missio implements TesteableEntity, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idArchivoArcaico;
+    private Integer idArchivoArcaico;
 
     @Column(columnDefinition = "LONGTEXT")
     private String infoAventura;
@@ -43,11 +44,11 @@ public class Missio implements TesteableEntity, Serializable {
     @Column
     private boolean realizado;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
     name = "missio_aeronau", 
-    joinColumns = @JoinColumn(name = "aeronau_id"), 
-    inverseJoinColumns = @JoinColumn(name = "missio_id"))
+    joinColumns = @JoinColumn(name = "missio_id"), 
+    inverseJoinColumns = @JoinColumn(name = "aeronau_id"))
     private List<Aeronau> aeronaus;
 
     public Missio(int idArchivoArcaico, String infoAventura, float poderMinimo, Date fechaColapso, boolean realizado) {

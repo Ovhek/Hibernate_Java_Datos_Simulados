@@ -29,6 +29,17 @@ public abstract class JavaFaker {
     private static Date utilDateToSqlDate(java.util.Date date){
         return new java.sql.Date(date.getTime());
     }
+    
+    public static Object generarGenerico(Object objeto){
+        if (objeto instanceof Combat) return generarCombat();
+        if (objeto instanceof Transport) return generarTransport();
+        if (objeto instanceof Dron) return generarDron();
+        if (objeto instanceof Pilot) return generarPilot();
+        if (objeto instanceof Mecanic) return generarMecanic();
+        if (objeto instanceof Missio) return generarMissio();
+        return null;
+    }
+    
     /**
      * Genera un objeto de tipo Combat
      * @return Objeto de tipo Combat

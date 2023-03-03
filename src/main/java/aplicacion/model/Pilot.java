@@ -21,7 +21,7 @@ public class Pilot extends Soldat implements TesteableEntity, Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(optional = true,mappedBy = "pilotAeronau", cascade = CascadeType.ALL)
     private Pilotada pilotada;
     
 
@@ -34,6 +34,10 @@ public class Pilot extends Soldat implements TesteableEntity, Serializable {
     }
 
     public Pilot() {
+    }
+
+    public void setPilotada(Pilotada pilotada) {
+        this.pilotada = pilotada;
     }
 
     @Override
