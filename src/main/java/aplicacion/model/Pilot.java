@@ -81,4 +81,10 @@ public class Pilot extends Soldat implements TesteableEntity, Serializable {
         this.mercenario = b;
     }
 
+    @Override
+    public String toString() {
+        //return super() pilotada=" + pilotada + '}';
+        return "Pilot " + super.toString() + " pilotada= " + pilotada;
+    }
+
 }

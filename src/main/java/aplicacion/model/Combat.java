@@ -28,8 +28,6 @@ public class Combat extends Pilotada implements TesteableEntity, Serializable{
 
     public Combat() {
     }
-
-    
     
     @Override
     public Integer getAtributIdentificador() {
@@ -74,6 +72,11 @@ public class Combat extends Pilotada implements TesteableEntity, Serializable{
     @Override
     public void setAtributBoolean(Boolean b) {
         this.magiaProhibida = b;
+    }
+    
+    @Override
+    public String toString() {
+        return "Combat " + super.toString();
     }
     
 }

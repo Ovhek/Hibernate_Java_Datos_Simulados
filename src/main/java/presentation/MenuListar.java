@@ -38,7 +38,7 @@ public class MenuListar {
         System.out.println("Indica el id final:");
         int idFinal = sc.nextInt();
         
-        System.out.println("Las entidades encontradas son:");
+        System.out.println("\nLas entidades encontradas son:");
         listarEntidadFiltrada(entrada, idInicial, idFinal);
     }
 }

@@ -31,6 +31,10 @@ public abstract class Autonoma extends Aeronau implements Serializable {
 
     public Autonoma() {
     }
-    
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
     
 }
