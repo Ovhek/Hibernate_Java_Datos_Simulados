@@ -31,7 +31,7 @@ public class Missio implements TesteableEntity, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idArchivoArcaico;
 
-    @Column
+    @Column(columnDefinition = "LONGTEXT")
     private String infoAventura;
 
     @Column
@@ -45,9 +45,9 @@ public class Missio implements TesteableEntity, Serializable {
 
     @ManyToMany
     @JoinTable(
-            name = "missio_aeronau",
-            joinColumns = @JoinColumn(name = "aeronau_id"),
-            inverseJoinColumns = @JoinColumn(name = "missio_id"))
+    name = "missio_aeronau", 
+    joinColumns = @JoinColumn(name = "aeronau_id"), 
+    inverseJoinColumns = @JoinColumn(name = "missio_id"))
     private List<Aeronau> aeronaus;
 
     public Missio(int idArchivoArcaico, String infoAventura, float poderMinimo, Date fechaColapso, boolean realizado) {

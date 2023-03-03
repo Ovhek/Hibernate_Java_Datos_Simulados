@@ -17,13 +17,12 @@ import java.util.Scanner;
 import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.metamodel.model.domain.internal.SingularAttributeImpl;
-import org.hibernate.query.Query;
 import utils.HibernateUtils;
-import utils.JavaFaker;
 import utils.SingleSession;
+
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -174,7 +173,7 @@ public class Listar {
                     for (Missio ms : llistaMissio) {
                         System.out.println(ms.toString());
                     }
-                    logger.info(llistaMissio);
+                    //logger.info(llistaMissio);
 
                     /*String queryString = "from " + s;
                     Query query = ss.createQuery(queryString);

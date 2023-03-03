@@ -4,15 +4,15 @@
  */
 package datos;
 
-import java.io.Serializable;
+import aplicacion.model.Dron;
 
 /**
  * DAO para la clase de dron. Extiende del GenericDAOImpl
  */
-public class DronDAO extends GenericDAOImpl<DronDAO, Integer>{
+public class DronDAO extends GenericDAOImpl<Dron, Integer>{
     
-    public DronDAO(Class<DronDAO> clase) {
-        super(DronDAO.class);
+    public DronDAO() {
+        super(Dron.class);
     }
     
 }

@@ -4,15 +4,15 @@
  */
 package datos;
 
-import java.io.Serializable;
+import aplicacion.model.Missio;
 
 /**
  * DAO para la clase de missio. Extiende del GenericDAOImpl
  */
-public class MissioDAO extends GenericDAOImpl<MissioDAO, Integer>{
+public class MissioDAO extends GenericDAOImpl<Missio, Integer>{
     
-    public MissioDAO(Class<MissioDAO> clase) {
-        super(MissioDAO.class);
+    public MissioDAO() {
+        super(Missio.class);
     }
     
 }

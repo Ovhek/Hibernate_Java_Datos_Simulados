@@ -4,15 +4,15 @@
  */
 package datos;
 
-import java.io.Serializable;
+import aplicacion.model.Mecanic;
 
 /**
  * DAO para la clase de mecanic. Extiende del GenericDAOImpl
  */
-public class MecanicDAO extends GenericDAOImpl<MecanicDAO, Integer>{
+public class MecanicDAO extends GenericDAOImpl<Mecanic, Integer>{
     
-    public MecanicDAO(Class<MecanicDAO> clase) {
-        super(MecanicDAO.class);
+    public MecanicDAO() {
+        super(Mecanic.class);
     }
     
 }

@@ -4,15 +4,15 @@
  */
 package datos;
 
-import java.io.Serializable;
+import aplicacion.model.Transport;
 
 /**
  * DAO para la clase de transport. Extiende del GenericDAOImpl
  */
-public class TransportDAO extends GenericDAOImpl<TransportDAO, Integer>{
+public class TransportDAO extends GenericDAOImpl<Transport, Integer>{
     
-    public TransportDAO(Class<TransportDAO> clase) {
-        super(TransportDAO.class);
+    public TransportDAO() {
+        super(Transport.class);
     }
     
 }

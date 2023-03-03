@@ -15,6 +15,7 @@ import aplicacion.model.Soldat;
 import aplicacion.model.Transport;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import utils.JavaFaker;
 
 /**
@@ -34,21 +35,67 @@ public class ClassFactory implements TesteableFactory {
         p.setMecanics(mecanic);
         return p;
     }
-
+    
+    /**
+     * Asigna una lista de misiones a una aeronave
+     * @param lm lista de misiones
+     * @param a aeronave a le que asignamos las misiones
+     * @return devuele la aeronave con las misiones asignadas
+     * @throws Exception si lm contiene mas de dos misiones
+     */
     @Override
     public Aeronau addMissionsToAeronau(List<Missio> lm, Aeronau a) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        // Recorro la lista de misiones lm, comprovando que cada mission tenga
+        // menos de 8 aeronaves asignadas:
+        // En caso de que la mision tenga mas de 8, se elimina de la lista,
+        //en caso contrario se le asigna la aeronave
+        lm.forEach(m -> {
+            if (m.getAeronaus().size() > 7) {
+                lm.remove(m);
+            } else {
+                m.getAeronaus().add(a);
+            }
+        });
+
+        //Compruevo que la lista de misiones de la aeronave exista
+        if (a.getMissions() != null) {
+            List<Missio> missions = a.getMissions();
+            if (lm.size() > 2) {
+                throw new Exception("Como maximo se pueden añadir 2 misiones");
+            }
+
+            //Anyadimos la lista lm a la lista de misiones de la aeronave
+            missions.addAll(lm);
+
+            //Vamos eliminando la primera mission de la lista de misiones 
+            //de la aeronave hasta que queden solo 2 misiones.
+            //tambien eliminamos de la mision(eliminada) la aeronave
+            while (missions.size() > 2) {
+                missions.get(0).getAeronaus().remove(a);
+                missions.remove(0);
+                
+            }
+        } else {
+            //Como la lista no existe, simplemente le asigno la lista lm
+            a.setMissions(lm);
+        }
+
+        return a;
     }
 
     @Override
     public Missio addAeronausToMissio(List<Aeronau> la, Missio m) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return m;
     }
 
     @Override
     public Aeronau addPilotToAeronauPilotada(Pilot p, Pilotada a) throws Exception {
         a.setPilot(p);
         return a;
+    }
+
+    public ClassFactory() {
     }
 
     @Override
@@ -98,12 +145,22 @@ public class ClassFactory implements TesteableFactory {
 
     @Override
     public Soldat soldatFactory(Class<?> tipus) {
+        Random rnd = new Random();
+        int rand = rnd.nextInt(2);
+        Pilotada pilotada = null;
+        
+        if(rand == 0) pilotada = JavaFaker.generarCombat();
+        else pilotada = JavaFaker.generarTransport();
+        
+        
         Soldat soldat = null;
         if (tipus.equals(Mecanic.class)) {
             soldat = JavaFaker.generarMecanic();
+            ((Mecanic)soldat).setPilotada(pilotada);
         } else if (tipus.equals(Pilot.class)) {
             soldat = JavaFaker.generarPilot();
         }
+        
         return soldat;
     }
 
