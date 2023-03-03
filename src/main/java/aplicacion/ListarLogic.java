@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package presentation;
+package aplicacion;
 
 import aplicacion.model.Combat;
 import aplicacion.model.Dron;
@@ -13,72 +13,44 @@ import aplicacion.model.Transport;
 import jakarta.persistence.metamodel.EntityType;
 import jakarta.persistence.metamodel.PluralAttribute;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.metamodel.model.domain.internal.SingularAttributeImpl;
 import utils.HibernateUtils;
 import utils.SingleSession;
 
-import org.hibernate.HibernateException;
-
 /**
  *
  * @author ivan
  */
-public class Listar {
+public class ListarLogic {
 
-    private static final Logger logger = LogManager.getLogger(HibernateUtils.class);
     private static Session ss = SingleSession.getInstance().getSessio();
-
-    public static void menuListar() {
-        Scanner sc = new Scanner(System.in);
-        Set<EntityType<?>> entidades = ss.getMetamodel().getEntities();
-
-        System.out.println("Indica qué entidades quieres listar:");
-        listarEntidades();
-        String entrada = sc.nextLine();
-        System.out.println("Indica el id inicial:");
-        int idInicial = sc.nextInt();
-        System.out.println("Indica el id final:");
-        int idFinal = sc.nextInt();
-        /*EntityType<?> ent = null;
-        for (EntityType<?> entidad : entidades) {
-            if (entidad.getName().equals(entrada)) {
-                ent = entidad;
-            }
-        }*/
-        listarEntidad(entrada, idInicial, idFinal);
-
-    }
+    private static final Logger logger = LogManager.getLogger(HibernateUtils.class);
 
     /**
-     * Listar todas las Entidades
+     * Método que lista todas las Entidades
      */
     public static void listarEntidades() {
-        try {
-            // Guardar todas las entidades en una lista
-            Set<EntityType<?>> entidades = ss.getMetamodel().getEntities();
-            for (EntityType<?> entidad : entidades) {
-                System.out.println(entidad.getName());
-            }
-            System.out.println();
-        } catch (HibernateException e) {
-            e.printStackTrace();
+        // Guardar todas las entidades en una lista
+        Set<EntityType<?>> entidades = ss.getMetamodel().getEntities();
+        for (EntityType<?> entidad : entidades) {
+            System.out.println(entidad.getName());
         }
     }
 
     /**
-     * Listar todas las entidades que estén entre el rango de id's elegido por
-     * el usuario anteriormente
+     * Listar todos los registros que sean del tipo de Entidad filtrada por un
+     * rango de id's.Todo elegido por el usuario.
      *
-     * @param s
+     * @param entidad
      * @param idInicial
      * @param idFinal
      */
-    public static void listarEntidad(String s, int idInicial, int idFinal) {
+    public static void listarEntidadFiltrada(String entidad, int idInicial, int idFinal) {
         try {
             Set<EntityType<?>> entidades = ss.getMetamodel().getEntities();
             /*Missio m = JavaFaker.generarMissio();
@@ -86,12 +58,12 @@ public class Listar {
             ss.persist(m);
             ss.getTransaction().commit();*/
 
-            switch (s) {
+            switch (entidad) {
 
                 case "Pilot":
-                    
+
                     // Buscar los registros de la tabla de Pilot
-                    List<Pilot> llistaPilot = ss.createQuery("from " + s, Pilot.class).list();
+                    List<Pilot> llistaPilot = ss.createQuery("from " + entidad, Pilot.class).list();
                     for (Pilot pi : llistaPilot) {
                         System.out.println(pi.toString());
                     }
@@ -107,9 +79,9 @@ public class Listar {
                     break;
 
                 case "Dron":
-                    
+
                     // Buscar los registros de la tabla de Dron
-                    List<Dron> llistaDron = ss.createQuery("from " + s, Dron.class).list();
+                    List<Dron> llistaDron = ss.createQuery("from " + entidad, Dron.class).list();
                     for (Dron dr : llistaDron) {
                         System.out.println(dr.toString());
                     }
@@ -125,9 +97,9 @@ public class Listar {
                     break;
 
                 case "Mecanic":
-                    
+
                     // Buscar los registros de la tabla de Mecanic
-                    List<Mecanic> llistaMecanic = ss.createQuery("from " + s, Mecanic.class).list();
+                    List<Mecanic> llistaMecanic = ss.createQuery("from " + entidad, Mecanic.class).list();
                     for (Mecanic me : llistaMecanic) {
                         System.out.println(me.toString());
                     }
@@ -139,9 +111,9 @@ public class Listar {
                     break;
 
                 case "Transport":
-                    
+
                     // Buscar los registros de la tabla de Transport
-                    List<Transport> llistaTransport = ss.createQuery("from " + s, Transport.class).list();
+                    List<Transport> llistaTransport = ss.createQuery("from " + entidad, Transport.class).list();
                     for (Transport tr : llistaTransport) {
                         System.out.println(tr.toString());
                     }
@@ -153,9 +125,9 @@ public class Listar {
                     break;
 
                 case "Combat":
-                    
+
                     // Buscar los registros de la tabla de Combat
-                    List<Combat> llistaCombat = ss.createQuery("from " + s, Combat.class).list();
+                    List<Combat> llistaCombat = ss.createQuery("from " + entidad, Combat.class).list();
                     for (Combat ms : llistaCombat) {
                         System.out.println(ms.toString());
                     }
@@ -169,11 +141,8 @@ public class Listar {
 
                 case "Missio":
                     // Buscar los registros de la tabla de Missio
-                    List<Missio> llistaMissio = ss.createQuery("from " + s, Missio.class).list();
-                    for (Missio ms : llistaMissio) {
-                        System.out.println(ms.toString());
-                    }
-                    //logger.info(llistaMissio);
+                    List<Missio> llistaMissio = ss.createQuery("from " + entidad, Missio.class).list();
+                    logger.info(llistaMissio);
 
                     /*String queryString = "from " + s;
                     Query query = ss.createQuery(queryString);
@@ -182,7 +151,6 @@ public class Listar {
                     // Filtrar los registros por rango de Id's
                     List<Missio> listaFiltradaMissio = llistaMissio.stream().filter(x -> x.getAtributIdentificador() >= idInicial && x.getAtributIdentificador() <= idFinal).toList();
                     logger.info("LISTA FILTRADA POR ID:::" + listaFiltradaMissio);
-
                     break;
 
                 case "Autonoma":
@@ -199,8 +167,10 @@ public class Listar {
             ex.printStackTrace();
         }
     }
-
-    // Listar los Atributos de cada Entidad
+    
+    /**
+     * Listar los Atributos de cada Entidad
+     */
     public static void listarAtributos() {
         Set<EntityType<?>> entidades = ss.getMetamodel().getEntities();
         Set<PluralAttribute<?, ?, ?>> plural;

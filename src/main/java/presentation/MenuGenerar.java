@@ -4,6 +4,7 @@
  */
 package presentation;
 
+import static aplicacion.ListarLogic.listarEntidades;
 import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,7 +33,7 @@ public abstract class MenuGenerar {
 
             switch (option) {
                 case 1:
-                    
+                    listarEntidades();
                     break;
                 case 2:
                     generarClases();

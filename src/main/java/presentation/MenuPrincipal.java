@@ -7,7 +7,7 @@ package presentation;
 import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import utils.HibernateUtils;
+import static presentation.MenuListar.menuListar;
 
 /**
  *
@@ -43,7 +43,7 @@ public abstract class MenuPrincipal {
                     //TODO: Llamar al menu de eliminar
                     break;
                 case 3:
-                    //TODO: Llamar al menu de listar.
+                    menuListar();
                     break;
                 case 4:
                     logger.info("Hasta la próxima!!");
