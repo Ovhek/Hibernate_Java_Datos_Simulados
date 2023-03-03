@@ -9,6 +9,7 @@ import aplicacion.model.Dron;
 import aplicacion.model.Mecanic;
 import aplicacion.model.Missio;
 import aplicacion.model.Pilot;
+import aplicacion.model.Soldat;
 import aplicacion.model.Transport;
 import jakarta.persistence.metamodel.EntityType;
 import jakarta.persistence.metamodel.PluralAttribute;
@@ -20,6 +21,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.metamodel.model.domain.internal.SingularAttributeImpl;
 import utils.HibernateUtils;
+import utils.JavaFaker;
 import utils.SingleSession;
 
 /**
@@ -53,8 +55,12 @@ public class ListarLogic {
     public static void listarEntidadFiltrada(String entidad, int idInicial, int idFinal) {
         try {
             Set<EntityType<?>> entidades = ss.getMetamodel().getEntities();
-            /*Missio m = JavaFaker.generarMissio();
+            
+            /*Pilot p = JavaFaker.generarPilot();
             ss.beginTransaction();
+            ss.persist(p);
+
+            Mecanic m = JavaFaker.generarMecanic();
             ss.persist(m);
             ss.getTransaction().commit();*/
 
@@ -64,10 +70,6 @@ public class ListarLogic {
 
                     // Buscar los registros de la tabla de Pilot
                     List<Pilot> llistaPilot = ss.createQuery("from " + entidad, Pilot.class).list();
-                    for (Pilot pi : llistaPilot) {
-                        System.out.println(pi.toString());
-                    }
-                    logger.info(llistaPilot);
 
                     List<Pilot> llistaFiltradaPilot = llistaPilot.stream().filter(x -> x.getAtributIdentificador() >= idInicial && x.getAtributIdentificador() <= idFinal).toList();
                     logger.info("LISTA FILTRADA POR ID:::" + llistaFiltradaPilot);
@@ -82,10 +84,6 @@ public class ListarLogic {
 
                     // Buscar los registros de la tabla de Dron
                     List<Dron> llistaDron = ss.createQuery("from " + entidad, Dron.class).list();
-                    for (Dron dr : llistaDron) {
-                        System.out.println(dr.toString());
-                    }
-                    logger.info(llistaDron);
 
                     List<Dron> llistaFiltradaDron = llistaDron.stream().filter(x -> x.getAtributIdentificador() >= idInicial && x.getAtributIdentificador() <= idFinal).toList();
                     logger.info("LISTA FILTRADA POR ID:::" + llistaFiltradaDron);
@@ -93,17 +91,19 @@ public class ListarLogic {
                     break;
 
                 case "Soldat":
+                    
+                    // Buscar los registros de la tabla de Soldat
+                    List<Soldat> llistaSoldat = ss.createQuery("from " + entidad, Soldat.class).list();
+
+                    List<Soldat> llistaFiltradaSoldat = llistaSoldat.stream().filter(x -> x.getNumColegiado()>= idInicial && x.getNumColegiado()<= idFinal).toList();
+                    logger.info("LISTA FILTRADA POR ID:::" + llistaFiltradaSoldat);
 
                     break;
 
                 case "Mecanic":
-
+                    
                     // Buscar los registros de la tabla de Mecanic
                     List<Mecanic> llistaMecanic = ss.createQuery("from " + entidad, Mecanic.class).list();
-                    for (Mecanic me : llistaMecanic) {
-                        System.out.println(me.toString());
-                    }
-                    logger.info(llistaMecanic);
 
                     List<Mecanic> llistaFiltradaMecanic = llistaMecanic.stream().filter(x -> x.getAtributIdentificador() >= idInicial && x.getAtributIdentificador() <= idFinal).toList();
                     logger.info("LISTA FILTRADA POR ID:::" + llistaFiltradaMecanic);
@@ -114,10 +114,6 @@ public class ListarLogic {
 
                     // Buscar los registros de la tabla de Transport
                     List<Transport> llistaTransport = ss.createQuery("from " + entidad, Transport.class).list();
-                    for (Transport tr : llistaTransport) {
-                        System.out.println(tr.toString());
-                    }
-                    logger.info(llistaTransport);
 
                     List<Transport> llistaFiltradaTransport = llistaTransport.stream().filter(x -> x.getAtributIdentificador() >= idInicial && x.getAtributIdentificador() <= idFinal).toList();
                     logger.info("LISTA FILTRADA POR ID:::" + llistaFiltradaTransport);
@@ -128,10 +124,6 @@ public class ListarLogic {
 
                     // Buscar los registros de la tabla de Combat
                     List<Combat> llistaCombat = ss.createQuery("from " + entidad, Combat.class).list();
-                    for (Combat ms : llistaCombat) {
-                        System.out.println(ms.toString());
-                    }
-                    logger.info(llistaCombat);
 
                     // Filtrar los registros por rango de Id's
                     List<Combat> llistaFiltradaCombat = llistaCombat.stream().filter(x -> x.getAtributIdentificador() >= idInicial && x.getAtributIdentificador() <= idFinal).toList();
@@ -142,12 +134,7 @@ public class ListarLogic {
                 case "Missio":
                     // Buscar los registros de la tabla de Missio
                     List<Missio> llistaMissio = ss.createQuery("from " + entidad, Missio.class).list();
-                    logger.info(llistaMissio);
 
-                    /*String queryString = "from " + s;
-                    Query query = ss.createQuery(queryString);
-                    List results = query.list();
-                    logger.info("RESULTS::: " + results);*/
                     // Filtrar los registros por rango de Id's
                     List<Missio> listaFiltradaMissio = llistaMissio.stream().filter(x -> x.getAtributIdentificador() >= idInicial && x.getAtributIdentificador() <= idFinal).toList();
                     logger.info("LISTA FILTRADA POR ID:::" + listaFiltradaMissio);
@@ -160,7 +147,6 @@ public class ListarLogic {
                 case "Pilotada":
 
                     break;
-
             }
 
         } catch (HibernateException ex) {

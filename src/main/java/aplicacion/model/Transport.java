@@ -74,5 +74,10 @@ public class Transport extends Pilotada implements TesteableEntity, Serializable
     public void setAtributBoolean(Boolean b) {
         this.magiaProhibida = b;
     }
+    
+    @Override
+    public String toString() {
+        return "Transport " + super.toString();
+    }
 
 }
