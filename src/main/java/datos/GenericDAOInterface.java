@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  *
  * @param <Entidad> Objeto (Entidad)
- * @param ID extends Serializable (El tipo de ID (objeto) solo puede ser de tipo
+ * @param <ID> extends Serializable (El tipo de ID (objeto) solo puede ser de tipo
  * serializable --> que se puede convertir a una secuencia de bytes y luego a un
  * objeto otra vez)
  *
