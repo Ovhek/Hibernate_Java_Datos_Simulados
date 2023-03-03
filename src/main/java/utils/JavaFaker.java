@@ -99,6 +99,7 @@ public abstract class JavaFaker {
      * @return Objeto de tipo Missio
      */
     public static Missio generarMissio() {
+        initFaker();
         String infoAventura = faker.elderScrolls().quote();
         float poderMinimo = (float) faker.number().randomDouble(2, 500, 10000);
         Date fechaColapso = utilDateToSqlDate(faker.date().future(100, TimeUnit.DAYS));
