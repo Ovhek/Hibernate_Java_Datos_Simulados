@@ -28,7 +28,6 @@ public class MenuListar {
 
     public static void menuListar() throws ClassNotFoundException, NoSuchMethodException, NoSuchMethodException, InstantiationException, InstantiationException, IllegalAccessException, InvocationTargetException, InvocationTargetException {
         Scanner sc = new Scanner(System.in);
-        Set<EntityType<?>> entidades = ss.getMetamodel().getEntities();
 
         System.out.println("Indica qué entidades quieres listar:");
         listarEntidades();
