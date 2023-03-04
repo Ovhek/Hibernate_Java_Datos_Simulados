@@ -4,11 +4,14 @@
  */
 package aplicacion;
 
+import aplicacion.model.Aeronau;
+import aplicacion.model.Autonoma;
 import aplicacion.model.Combat;
 import aplicacion.model.Dron;
 import aplicacion.model.Mecanic;
 import aplicacion.model.Missio;
 import aplicacion.model.Pilot;
+import aplicacion.model.Pilotada;
 import aplicacion.model.Soldat;
 import aplicacion.model.Transport;
 import jakarta.persistence.metamodel.EntityType;
@@ -30,7 +33,7 @@ import utils.SingleSession;
  */
 public class ListarLogic {
 
-    private static Session ss = SingleSession.getInstance().getSessio();
+    private static final Session ss = SingleSession.getInstance().getSessio();
     private static final Logger logger = LogManager.getLogger(HibernateUtils.class);
 
     /**
@@ -46,16 +49,14 @@ public class ListarLogic {
 
     /**
      * Listar todos los registros que sean del tipo de Entidad filtrada por un
-     * rango de id's.Todo elegido por el usuario.
+     * rango de id's. Todo elegido por el usuario.
      *
      * @param entidad
      * @param idInicial
      * @param idFinal
      */
     public static void listarEntidadFiltrada(String entidad, int idInicial, int idFinal) {
-        try {
-            Set<EntityType<?>> entidades = ss.getMetamodel().getEntities();
-            
+        try {            
             /*Pilot p = JavaFaker.generarPilot();
             ss.beginTransaction();
             ss.persist(p);
@@ -77,6 +78,12 @@ public class ListarLogic {
                     break;
 
                 case "Aeronau":
+                    
+                    // Buscar los registros de la tabla de Aeronau y sus Entidades "hijas"
+                    List<Aeronau> llistaAeronau = ss.createQuery("from " + entidad, Aeronau.class).list();
+
+                    List<Aeronau> llistaFiltradaAeronau = llistaAeronau.stream().filter(x -> x.getIdentificadorArcano()>= idInicial && x.getIdentificadorArcano() <= idFinal).toList();
+                    logger.info("LISTA FILTRADA POR ID:::" + llistaFiltradaAeronau);
 
                     break;
 
@@ -92,7 +99,7 @@ public class ListarLogic {
 
                 case "Soldat":
                     
-                    // Buscar los registros de la tabla de Soldat
+                    // Buscar los registros de la tabla de Soldat y sus Entidades "hijas"
                     List<Soldat> llistaSoldat = ss.createQuery("from " + entidad, Soldat.class).list();
 
                     List<Soldat> llistaFiltradaSoldat = llistaSoldat.stream().filter(x -> x.getNumColegiado()>= idInicial && x.getNumColegiado()<= idFinal).toList();
@@ -141,10 +148,24 @@ public class ListarLogic {
                     break;
 
                 case "Autonoma":
+                    
+                    // Buscar los registros de la tabla de Autonoma y sus Entidades "hijas"
+                    List<Autonoma> llistaAutonoma = ss.createQuery("from " + entidad, Autonoma.class).list();
+
+                    // Filtrar los registros por rango de Id's
+                    List<Autonoma> listaFiltradaAutonoma = llistaAutonoma.stream().filter(x -> x.getIdentificadorArcano()>= idInicial && x.getIdentificadorArcano() <= idFinal).toList();
+                    logger.info("LISTA FILTRADA POR ID:::" + listaFiltradaAutonoma);
 
                     break;
 
                 case "Pilotada":
+                    
+                    // Buscar los registros de la tabla de Pilotada y sus Entidades "hijas"
+                    List<Pilotada> llistaPilotada = ss.createQuery("from " + entidad, Pilotada.class).list();
+
+                    // Filtrar los registros por rango de Id's
+                    List<Pilotada> listaFiltradaPilotada = llistaPilotada.stream().filter(x -> x.getIdentificadorArcano()>= idInicial && x.getIdentificadorArcano() <= idFinal).toList();
+                    logger.info("LISTA FILTRADA POR ID:::" + listaFiltradaPilotada);
 
                     break;
             }
@@ -176,5 +197,4 @@ public class ListarLogic {
             }
         }
     }
-
 }
