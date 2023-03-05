@@ -19,13 +19,8 @@ import presentation.MenuCredenciales;
 public class M06uf2pracma {
 
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalAccessException, InvocationTargetException {
-        MenuCredenciales.init();
-        MenuListar.menuListar();       
-        //MenuPrincipal.init();
-        //Listar.listarEntidades();
-
+        MenuCredenciales.init();      
         MenuPrincipal.init();
-        //Listar.listarEntidades();
     }
 
 }
