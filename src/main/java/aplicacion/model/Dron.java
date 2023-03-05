@@ -75,4 +75,9 @@ public class Dron extends Autonoma implements TesteableEntity, Serializable {
         this.magiaProhibida = b;
     }
 
+    @Override
+    public String toString() {
+        return "Dron " + super.toString();
+    }
+
 }

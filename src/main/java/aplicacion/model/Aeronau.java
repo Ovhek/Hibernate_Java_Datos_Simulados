@@ -114,6 +114,10 @@ public abstract class Aeronau implements Serializable{
     public void setMagiaProhibida(boolean magiaProhibida) {
         this.magiaProhibida = magiaProhibida;
     }
-    
+
+    @Override
+    public String toString() {
+        return "{" + "identificadorArcano=" + identificadorArcano + ", modelo=" + modelo + ", mana=" + mana + ", ultimaRecarga=" + ultimaRecarga + ", magiaProhibida=" + magiaProhibida + ", missions=" + missions + '}';
+    }
     
 }

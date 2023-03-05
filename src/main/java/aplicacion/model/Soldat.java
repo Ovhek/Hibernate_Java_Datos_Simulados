@@ -93,6 +93,10 @@ public abstract class Soldat implements Serializable {
     public void setMercenario(boolean mercenario) {
         this.mercenario = mercenario;
     }
-    
+
+    @Override
+    public String toString() {
+        return "{" + "numColegiado=" + numColegiado + ", tipoMagia=" + tipoMagia + ", poderMagico=" + poderMagico + ", fechaRenacimiento=" + fechaRenacimiento + ", mercenario=" + mercenario + '}';
+    }
     
 }

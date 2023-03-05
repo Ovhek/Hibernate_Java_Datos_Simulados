@@ -4,9 +4,13 @@
  */
 package aplicacion;
 
-import presentation.Listar;
+import aplicacion.model.Combat;
+import java.lang.reflect.InvocationTargetException;
+import presentation.MenuListar;
 import presentation.MenuCredenciales;
 import presentation.MenuPrincipal;
+
+import presentation.MenuCredenciales;
 
 /**
  *
@@ -14,8 +18,11 @@ import presentation.MenuPrincipal;
  */
 public class M06uf2pracma {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalAccessException, InvocationTargetException {
         MenuCredenciales.init();
+        MenuListar.menuListar();       
+        //MenuPrincipal.init();
+        //Listar.listarEntidades();
 
         MenuPrincipal.init();
         //Listar.listarEntidades();

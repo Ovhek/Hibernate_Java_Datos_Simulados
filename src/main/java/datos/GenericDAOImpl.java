@@ -7,7 +7,6 @@ package datos;
 import jakarta.persistence.EntityManager;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utils.SingleSession;
@@ -17,7 +16,7 @@ import utils.SingleSession;
  * DAO generico para todas las entidades de hibernate
  *
  * @param <Entidad> Objeto (Entidad)
- * @param ID extends Serializable (El tipo de ID (objeto) solo puede ser de tipo
+ * @param <ID> extends Serializable (El tipo de ID (objeto) solo puede ser de tipo
  * serializable --> que se puede convertir a una secuencia de bytes y luego a un
  * objeto otra vez)
  *
