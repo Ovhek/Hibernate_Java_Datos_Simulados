@@ -25,10 +25,12 @@ import datos.MecanicDAO;
 import datos.MissioDAO;
 import datos.PilotDAO;
 import datos.TransportDAO;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -50,7 +52,7 @@ public abstract class MenuGenerar {
 
     public static void init() {
         try {
-            System.out.println("Menú de Generación de Clases");
+            System.out.println("\nMenú de Generación de Clases");
             System.out.println("1. Generar Clase");
             System.out.println("2. Volver");
             System.out.println("3. Salir");
@@ -85,7 +87,7 @@ public abstract class MenuGenerar {
         try {
             do {
 
-                System.out.println("¿Qué clase quieres generar?");
+                System.out.println("\n¿Qué clase quieres generar?");
                 System.out.println("1 - Combat");
                 System.out.println("2 - Transport");
                 System.out.println("3 - Mecanic");
@@ -331,9 +333,19 @@ public abstract class MenuGenerar {
                 }
 
                 logger.info("Clase generada correctamente.");
-                logger.info("Registros afectados: ");
+                logger.info("Clases generadas: ");
                 
-                objetosGenerados.forEach(objeto -> objeto.toString());
+                objetosGenerados.forEach(objeto -> {
+                    try {
+                        Method toStringWithObjects = objeto.getClass().getMethod("toStringWithObjects",String.class);
+                        System.out.println(toStringWithObjects.invoke(objeto, ""));
+                    } catch (Exception e) {
+                        System.out.println(objeto.toString());
+                    }
+                    System.out.println("");
+                });
+                
+                System.out.println("\n");
             } while (true);
         } catch (Exception e) {
             logger.error(e.getMessage());

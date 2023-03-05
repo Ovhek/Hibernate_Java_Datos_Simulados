@@ -46,9 +46,9 @@ public class Missio implements TesteableEntity, Serializable {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-    name = "missio_aeronau", 
-    joinColumns = @JoinColumn(name = "missio_id"), 
-    inverseJoinColumns = @JoinColumn(name = "aeronau_id"))
+            name = "missio_aeronau",
+            joinColumns = @JoinColumn(name = "missio_id"),
+            inverseJoinColumns = @JoinColumn(name = "aeronau_id"))
     private List<Aeronau> aeronaus;
 
     public Missio(int idArchivoArcaico, String infoAventura, float poderMinimo, Date fechaColapso, boolean realizado) {
@@ -164,7 +164,17 @@ public class Missio implements TesteableEntity, Serializable {
 
     @Override
     public String toString() {
-        return "Missio{" + "idArchivoArcaico=" + idArchivoArcaico + ", infoAventura=" + infoAventura + ", poderMinimo=" + poderMinimo + ", fechaColapso=" + fechaColapso + ", realizado=" + realizado + ", aeronaus=" + aeronaus + '}';
+        return "Missio{" + "idArchivoArcaico=" + idArchivoArcaico + ", infoAventura=" + infoAventura + ", poderMinimo=" + poderMinimo + ", fechaColapso=" + fechaColapso + ", realizado=" + realizado + '}';
+    }
+
+    public String toStringWithObjects(String objectString) {
+        String aeronausString = "\n\taeronaus: {\n";
+
+        for (Aeronau aeronau : aeronaus) {
+            aeronausString += "\t\t"+aeronau.toString() + "\n";
+        }
+        aeronausString += "\t}\n";
+        return "Missio{" + "idArchivoArcaico=" + idArchivoArcaico + ", infoAventura=" + infoAventura + ", poderMinimo=" + poderMinimo + ", fechaColapso=" + fechaColapso + ", realizado=" + realizado + "," + aeronausString +'}';
     }
 
 }
