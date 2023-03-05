@@ -32,7 +32,7 @@ public class Missio implements TesteableEntity, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idArchivoArcaico;
 
-    @Column(columnDefinition = "LONGTEXT")
+    @Column(length = 100000, columnDefinition = "LONGTEXT")
     private String infoAventura;
 
     @Column

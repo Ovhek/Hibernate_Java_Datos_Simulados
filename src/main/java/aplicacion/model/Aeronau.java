@@ -91,7 +91,7 @@ public abstract class Aeronau implements Serializable{
     }
 
     public void setMissions(List<Missio> missions) {
-        this.missions = (ArrayList<Missio>) missions;
+        this.missions = missions;
     }
     
 
