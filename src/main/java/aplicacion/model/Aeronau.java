@@ -117,7 +117,7 @@ public abstract class Aeronau implements Serializable{
 
     @Override
     public String toString() {
-        return "{" + "identificadorArcano=" + identificadorArcano + ", modelo=" + modelo + ", mana=" + mana + ", ultimaRecarga=" + ultimaRecarga + ", magiaProhibida=" + magiaProhibida + ", missions=" + missions + '}';
+        return "{" + "identificadorArcano=" + identificadorArcano + ", modelo=" + modelo + ", mana=" + mana + ", ultimaRecarga=" + ultimaRecarga + ", magiaProhibida=" + magiaProhibida + ", missions=" + missions.get(identificadorArcano).getAtributString() + '}';
     }
     
 }
