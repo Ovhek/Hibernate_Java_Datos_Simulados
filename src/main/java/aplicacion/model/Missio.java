@@ -163,7 +163,7 @@ public class Missio implements TesteableEntity, Serializable {
 
     @Override
     public String toString() {
-        return "Missio{" + "idArchivoArcaico=" + idArchivoArcaico + ", infoAventura=" + infoAventura + ", poderMinimo=" + poderMinimo + ", fechaColapso=" + fechaColapso + ", realizado=" + realizado + ", aeronaus=" + aeronaus + '}';
+        return "Missio{" + "idArchivoArcaico=" + idArchivoArcaico + ", infoAventura=" + infoAventura + ", poderMinimo=" + poderMinimo + ", fechaColapso=" + fechaColapso + ", realizado=" + realizado + ", aeronaus=" + aeronaus.get(idArchivoArcaico).getModelo() + '}';
     }
 
 }
