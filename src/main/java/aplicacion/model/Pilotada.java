@@ -64,6 +64,12 @@ public abstract class Pilotada extends Aeronau implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString() + "pilotAeronau=" + pilotAeronau + ", mecanics=" + mecanics.get(identificadorArcano).getAtributString() + '}';
+        return super.toString();
+    }
+
+    @Override
+    public String toStringWithObjects(String objectString) {
+        objectString = pilotAeronau.toString();
+        return super.toStringWithObjects(objectString);
     }
 }

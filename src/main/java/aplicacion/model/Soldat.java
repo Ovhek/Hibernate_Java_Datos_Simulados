@@ -99,4 +99,9 @@ public abstract class Soldat implements Serializable {
         return "{" + "numColegiado=" + numColegiado + ", tipoMagia=" + tipoMagia + ", poderMagico=" + poderMagico + ", fechaRenacimiento=" + fechaRenacimiento + ", mercenario=" + mercenario + '}';
     }
     
+    public String toStringWithObjects(String objectString) {
+        if(objectString == null ) objectString = "";
+        else objectString = "\n\t\t" + objectString +"\n\t}";
+        return "{" + "numColegiado=" + numColegiado + ", tipoMagia=" + tipoMagia + ", poderMagico=" + poderMagico + ", fechaRenacimiento=" + fechaRenacimiento + ", mercenario=" + mercenario + objectString +'}';
+    }
 }

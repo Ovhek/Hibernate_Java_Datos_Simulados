@@ -115,9 +115,23 @@ public abstract class Aeronau implements Serializable{
         this.magiaProhibida = magiaProhibida;
     }
 
+    private boolean recursion = false;
     @Override
     public String toString() {
-        return "{" + "identificadorArcano=" + identificadorArcano + ", modelo=" + modelo + ", mana=" + mana + ", ultimaRecarga=" + ultimaRecarga + ", magiaProhibida=" + magiaProhibida + ", missions=" + missions.get(identificadorArcano).getAtributString() + '}';
+        return "{" + "identificadorArcano=" + identificadorArcano + ", modelo=" + modelo + ", mana=" + mana + ", ultimaRecarga=" + ultimaRecarga + ", magiaProhibida=" + magiaProhibida + '}';
     }
     
+    public String toStringWithObjects(String objectString){
+        if(objectString == null) objectString = "";
+        else objectString = "\n\tsoldats: {\n" + objectString+"\n";
+        
+        
+        String missionsString = "\n\tmissions: {\n";
+        
+        for (Missio missio : missions) {
+            missionsString+= "\t\t" + missio.toString() + ",\n";
+        }
+        missionsString += "\t}\n";
+        return "{" + "identificadorArcano=" + identificadorArcano + ", modelo=" + modelo + ", mana=" + mana + ", ultimaRecarga=" + ultimaRecarga + ", magiaProhibida=" + magiaProhibida + "," + missionsString + "," + objectString +'}';
+    }
 }
