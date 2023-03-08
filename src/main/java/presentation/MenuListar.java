@@ -6,16 +6,13 @@ package presentation;
 
 import static aplicacion.ListarLogic.listarEntidadFiltrada;
 import static aplicacion.ListarLogic.listarEntidades;
-import jakarta.persistence.metamodel.EntityType;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
-import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
-import utils.HibernateUtils;
+import static presentation.MenuPrincipal.init;
 import utils.SingleSession;
-
 
 /**
  *
@@ -23,21 +20,39 @@ import utils.SingleSession;
  */
 public class MenuListar {
 
-    private static final Logger logger = LogManager.getLogger(HibernateUtils.class);
-    private static Session ss = SingleSession.getInstance().getSessio();
+    private static final Logger logger = LogManager.getLogger(MenuPrincipal.class);
+    private static final Session ss = SingleSession.getInstance().getSessio();
 
-    public static void menuListar() throws ClassNotFoundException, NoSuchMethodException, NoSuchMethodException, InstantiationException, InstantiationException, IllegalAccessException, InvocationTargetException, InvocationTargetException {
-        Scanner sc = new Scanner(System.in);
+    /**
+     * Menú que devuelve las entidades que desea listar el usuario, filtradas
+     * por un rango de id's
+     *
+     * @throws ClassNotFoundException
+     * @throws NoSuchMethodException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     */
+    public static void menuListar() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        try {
+            ss.getSessionFactory();
+            Scanner sc = new Scanner(System.in);
 
-        System.out.println("Indica qué entidades quieres listar:");
-        listarEntidades();
-        String entrada = sc.nextLine();
-        System.out.println("Indica el id inicial:");
-        int idInicial = sc.nextInt();
-        System.out.println("Indica el id final:");
-        int idFinal = sc.nextInt();
-        
-        System.out.println("\nLas entidades encontradas son:");
-        listarEntidadFiltrada(entrada, idInicial, idFinal);
+            System.out.println("\nIndica que entidades quieres listar:");
+            listarEntidades();
+            System.out.println();
+            String entrada = sc.nextLine();
+            System.out.println("Indica el id inicial:");
+            int idInicial = sc.nextInt();
+            System.out.println("Indica el id final:");
+            int idFinal = sc.nextInt();
+
+            listarEntidadFiltrada(entrada, idInicial, idFinal);
+            System.out.println();
+            init();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            init();
+        }
     }
 }

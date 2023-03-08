@@ -14,7 +14,6 @@ import aplicacion.model.Pilotada;
 import aplicacion.model.Soldat;
 import aplicacion.model.Transport;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import utils.JavaFaker;

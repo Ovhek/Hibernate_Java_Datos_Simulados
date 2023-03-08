@@ -7,7 +7,7 @@ package datos;
 import aplicacion.model.Combat;
 
 /**
- * DAO para la clase de combate. Extiende del GenericDAOImpl
+ * DAO para la clase Combat. Extiende del GenericDAOImpl
  */
 public class CombatDAO extends GenericDAOImpl<Combat, Integer>{
     

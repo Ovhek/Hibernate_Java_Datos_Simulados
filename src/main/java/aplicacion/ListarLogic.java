@@ -16,15 +16,12 @@ import aplicacion.model.Soldat;
 import aplicacion.model.Transport;
 import jakarta.persistence.metamodel.EntityType;
 import jakarta.persistence.metamodel.PluralAttribute;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Set;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.metamodel.model.domain.internal.SingularAttributeImpl;
-import utils.HibernateUtils;
-import utils.JavaFaker;
 import utils.SingleSession;
 
 /**
@@ -34,7 +31,6 @@ import utils.SingleSession;
 public class ListarLogic {
 
     private static final Session ss = SingleSession.getInstance().getSessio();
-    private static final Logger logger = LogManager.getLogger(HibernateUtils.class);
 
     /**
      * Método que lista todas las Entidades
@@ -49,21 +45,18 @@ public class ListarLogic {
 
     /**
      * Listar todos los registros que sean del tipo de Entidad filtrada por un
-     * rango de id's. Todo elegido por el usuario.
+     * rango de id's.Todo elegido por el usuario.
      *
      * @param entidad
      * @param idInicial
      * @param idFinal
+     * @throws java.lang.Exception
      */
-    public static void listarEntidadFiltrada(String entidad, int idInicial, int idFinal) {
-        try {            
-            /*Pilot p = JavaFaker.generarPilot();
-            ss.beginTransaction();
-            ss.persist(p);
-
-            Mecanic m = JavaFaker.generarMecanic();
-            ss.persist(m);
-            ss.getTransaction().commit();*/
+    public static void listarEntidadFiltrada(String entidad, int idInicial, int idFinal) throws Exception {
+        try {
+            if (idInicial > idFinal) {
+                throw new Exception("idInicial debe ser menor o igual a idFinal");
+            }
 
             switch (entidad) {
 
@@ -72,19 +65,45 @@ public class ListarLogic {
                     // Buscar los registros de la tabla de Pilot
                     List<Pilot> llistaPilot = ss.createQuery("from " + entidad, Pilot.class).list();
 
+                    // Filtrar los registros por rango de Id's
                     List<Pilot> llistaFiltradaPilot = llistaPilot.stream().filter(x -> x.getAtributIdentificador() >= idInicial && x.getAtributIdentificador() <= idFinal).toList();
-                    logger.info("LISTA FILTRADA POR ID:::" + llistaFiltradaPilot);
 
+                    System.out.println("\nLas entidades encontradas son:");
+                    llistaFiltradaPilot.forEach(objeto -> {
+                        try {
+                            Method toStringWithObjects = objeto.getClass().getMethod("toStringWithObjects", String.class);
+                            System.out.println(toStringWithObjects.invoke(objeto, ""));
+                        } catch (Exception e) {
+                            System.out.println(objeto.toString());
+                        }
+                        System.out.println("");
+                    });
+                    /*for (Pilot p : llistaFiltradaPilot) {
+                        System.out.println(p);
+                    }*/
                     break;
 
                 case "Aeronau":
-                    
+
                     // Buscar los registros de la tabla de Aeronau y sus Entidades "hijas"
                     List<Aeronau> llistaAeronau = ss.createQuery("from " + entidad, Aeronau.class).list();
 
-                    List<Aeronau> llistaFiltradaAeronau = llistaAeronau.stream().filter(x -> x.getIdentificadorArcano()>= idInicial && x.getIdentificadorArcano() <= idFinal).toList();
-                    logger.info("LISTA FILTRADA POR ID:::" + llistaFiltradaAeronau);
+                    // Filtrar los registros por rango de Id's
+                    List<Aeronau> llistaFiltradaAeronau = llistaAeronau.stream().filter(x -> x.getIdentificadorArcano() >= idInicial && x.getIdentificadorArcano() <= idFinal).toList();
 
+                    System.out.println("\nLas entidades encontradas son:");
+                    llistaFiltradaAeronau.forEach(objeto -> {
+                        try {
+                            Method toStringWithObjects = objeto.getClass().getMethod("toStringWithObjects", String.class);
+                            System.out.println(toStringWithObjects.invoke(objeto, ""));
+                        } catch (Exception e) {
+                            System.out.println(objeto.toString());
+                        }
+                        System.out.println("");
+                    });
+                    /*for(Aeronau a: llistaFiltradaAeronau) {
+                        System.out.println(a);
+                    }*/
                     break;
 
                 case "Dron":
@@ -92,29 +111,68 @@ public class ListarLogic {
                     // Buscar los registros de la tabla de Dron
                     List<Dron> llistaDron = ss.createQuery("from " + entidad, Dron.class).list();
 
+                    // Filtrar los registros por rango de Id's
                     List<Dron> llistaFiltradaDron = llistaDron.stream().filter(x -> x.getAtributIdentificador() >= idInicial && x.getAtributIdentificador() <= idFinal).toList();
-                    logger.info("LISTA FILTRADA POR ID:::" + llistaFiltradaDron);
 
+                    System.out.println("\nLas entidades encontradas son:");
+                    llistaFiltradaDron.forEach(objeto -> {
+                        try {
+                            Method toStringWithObjects = objeto.getClass().getMethod("toStringWithObjects", String.class);
+                            System.out.println(toStringWithObjects.invoke(objeto, ""));
+                        } catch (Exception e) {
+                            System.out.println(objeto.toString());
+                        }
+                        System.out.println("");
+                    });
+                    /*for (Dron d : llistaFiltradaDron) {
+                        System.out.println(d);
+                    }*/
                     break;
 
                 case "Soldat":
-                    
+
                     // Buscar los registros de la tabla de Soldat y sus Entidades "hijas"
                     List<Soldat> llistaSoldat = ss.createQuery("from " + entidad, Soldat.class).list();
 
-                    List<Soldat> llistaFiltradaSoldat = llistaSoldat.stream().filter(x -> x.getNumColegiado()>= idInicial && x.getNumColegiado()<= idFinal).toList();
-                    logger.info("LISTA FILTRADA POR ID:::" + llistaFiltradaSoldat);
+                    // Filtrar los registros por rango de Id's
+                    List<Soldat> llistaFiltradaSoldat = llistaSoldat.stream().filter(x -> x.getNumColegiado() >= idInicial && x.getNumColegiado() <= idFinal).toList();
 
+                    System.out.println("\nLas entidades encontradas son:");
+                    llistaFiltradaSoldat.forEach(objeto -> {
+                        try {
+                            Method toStringWithObjects = objeto.getClass().getMethod("toStringWithObjects", String.class);
+                            System.out.println(toStringWithObjects.invoke(objeto, ""));
+                        } catch (Exception e) {
+                            System.out.println(objeto.toString());
+                        }
+                        System.out.println("");
+                    });
+                    /*for (Soldat s : llistaFiltradaSoldat) {
+                        System.out.println(s);
+                    }*/
                     break;
 
                 case "Mecanic":
-                    
+
                     // Buscar los registros de la tabla de Mecanic
                     List<Mecanic> llistaMecanic = ss.createQuery("from " + entidad, Mecanic.class).list();
 
+                    // Filtrar los registros por rango de Id's
                     List<Mecanic> llistaFiltradaMecanic = llistaMecanic.stream().filter(x -> x.getAtributIdentificador() >= idInicial && x.getAtributIdentificador() <= idFinal).toList();
-                    logger.info("LISTA FILTRADA POR ID:::" + llistaFiltradaMecanic);
 
+                    System.out.println("\nLas entidades encontradas son:");
+                    llistaFiltradaMecanic.forEach(objeto -> {
+                        try {
+                            Method toStringWithObjects = objeto.getClass().getMethod("toStringWithObjects", String.class);
+                            System.out.println(toStringWithObjects.invoke(objeto, ""));
+                        } catch (Exception e) {
+                            System.out.println(objeto.toString());
+                        }
+                        System.out.println("");
+                    });
+                    /*for (Mecanic m : llistaFiltradaMecanic) {
+                        System.out.println(m);
+                    }*/
                     break;
 
                 case "Transport":
@@ -122,9 +180,22 @@ public class ListarLogic {
                     // Buscar los registros de la tabla de Transport
                     List<Transport> llistaTransport = ss.createQuery("from " + entidad, Transport.class).list();
 
+                    // Filtrar los registros por rango de Id's
                     List<Transport> llistaFiltradaTransport = llistaTransport.stream().filter(x -> x.getAtributIdentificador() >= idInicial && x.getAtributIdentificador() <= idFinal).toList();
-                    logger.info("LISTA FILTRADA POR ID:::" + llistaFiltradaTransport);
 
+                    System.out.println("\nLas entidades encontradas son:");
+                    llistaFiltradaTransport.forEach(objeto -> {
+                        try {
+                            Method toStringWithObjects = objeto.getClass().getMethod("toStringWithObjects", String.class);
+                            System.out.println(toStringWithObjects.invoke(objeto, ""));
+                        } catch (Exception e) {
+                            System.out.println(objeto.toString());
+                        }
+                        System.out.println("");
+                    });
+                    /*for (Transport t : llistaFiltradaTransport) {
+                        System.out.println(t);
+                    }*/
                     break;
 
                 case "Combat":
@@ -134,8 +205,19 @@ public class ListarLogic {
 
                     // Filtrar los registros por rango de Id's
                     List<Combat> llistaFiltradaCombat = llistaCombat.stream().filter(x -> x.getAtributIdentificador() >= idInicial && x.getAtributIdentificador() <= idFinal).toList();
-                    logger.info("LISTA FILTRADA POR ID:::" + llistaFiltradaCombat);
-
+                    System.out.println("\nLas entidades encontradas son:");
+                    llistaFiltradaCombat.forEach(objeto -> {
+                        try {
+                            Method toStringWithObjects = objeto.getClass().getMethod("toStringWithObjects", String.class);
+                            System.out.println(toStringWithObjects.invoke(objeto, ""));
+                        } catch (Exception e) {
+                            System.out.println(objeto.toString());
+                        }
+                        System.out.println("");
+                    });
+                    /*for (Combat c : llistaFiltradaCombat) {
+                        System.out.println(c);
+                    }*/
                     break;
 
                 case "Missio":
@@ -143,38 +225,76 @@ public class ListarLogic {
                     List<Missio> llistaMissio = ss.createQuery("from " + entidad, Missio.class).list();
 
                     // Filtrar los registros por rango de Id's
-                    List<Missio> listaFiltradaMissio = llistaMissio.stream().filter(x -> x.getAtributIdentificador() >= idInicial && x.getAtributIdentificador() <= idFinal).toList();
-                    logger.info("LISTA FILTRADA POR ID:::" + listaFiltradaMissio);
+                    List<Missio> llistaFiltradaMissio = llistaMissio.stream().filter(x -> x.getAtributIdentificador() >= idInicial && x.getAtributIdentificador() <= idFinal).toList();
+                    System.out.println("\nLas entidades encontradas son:");
+                    llistaFiltradaMissio.forEach(objeto -> {
+                        try {
+                            Method toStringWithObjects = objeto.getClass().getMethod("toStringWithObjects", String.class);
+                            System.out.println(toStringWithObjects.invoke(objeto, ""));
+                        } catch (Exception e) {
+                            System.out.println(objeto.toString());
+                        }
+                        System.out.println("");
+                    });
+                    /*for (Missio m : llistaFiltradaMissio) {
+                        System.out.println(m);
+                    }*/
                     break;
 
                 case "Autonoma":
-                    
+
                     // Buscar los registros de la tabla de Autonoma y sus Entidades "hijas"
                     List<Autonoma> llistaAutonoma = ss.createQuery("from " + entidad, Autonoma.class).list();
 
                     // Filtrar los registros por rango de Id's
-                    List<Autonoma> listaFiltradaAutonoma = llistaAutonoma.stream().filter(x -> x.getIdentificadorArcano()>= idInicial && x.getIdentificadorArcano() <= idFinal).toList();
-                    logger.info("LISTA FILTRADA POR ID:::" + listaFiltradaAutonoma);
+                    List<Autonoma> llistaFiltradaAutonoma = llistaAutonoma.stream().filter(x -> x.getIdentificadorArcano() >= idInicial && x.getIdentificadorArcano() <= idFinal).toList();
 
+                    System.out.println("\nLas entidades encontradas son:");
+                    llistaFiltradaAutonoma.forEach(objeto -> {
+                        try {
+                            Method toStringWithObjects = objeto.getClass().getMethod("toStringWithObjects", String.class);
+                            System.out.println(toStringWithObjects.invoke(objeto, ""));
+                        } catch (Exception e) {
+                            System.out.println(objeto.toString());
+                        }
+                        System.out.println("");
+                    });
+                    /*for (Autonoma a : llistaFiltradaAutonoma) {
+                        System.out.println(a);
+                    }*/
                     break;
 
                 case "Pilotada":
-                    
+
                     // Buscar los registros de la tabla de Pilotada y sus Entidades "hijas"
                     List<Pilotada> llistaPilotada = ss.createQuery("from " + entidad, Pilotada.class).list();
 
                     // Filtrar los registros por rango de Id's
-                    List<Pilotada> listaFiltradaPilotada = llistaPilotada.stream().filter(x -> x.getIdentificadorArcano()>= idInicial && x.getIdentificadorArcano() <= idFinal).toList();
-                    logger.info("LISTA FILTRADA POR ID:::" + listaFiltradaPilotada);
-
+                    List<Pilotada> llistaFiltradaPilotada = llistaPilotada.stream().filter(x -> x.getIdentificadorArcano() >= idInicial && x.getIdentificadorArcano() <= idFinal).toList();
+                    System.out.println("\nLas entidades encontradas son:");
+                    llistaFiltradaPilotada.forEach(objeto -> {
+                        try {
+                            Method toStringWithObjects = objeto.getClass().getMethod("toStringWithObjects", String.class);
+                            System.out.println(toStringWithObjects.invoke(objeto, ""));
+                        } catch (Exception e) {
+                            System.out.println(objeto.toString());
+                        }
+                        System.out.println("");
+                    });
+                    /*for (Pilotada p : llistaFiltradaPilotada) {
+                        System.out.println(p);
+                    }*/
                     break;
+
+                default:
+                    throw new Exception("Opción no válida. Vuelve a indicar una entidad de la lista.");
             }
 
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
     }
-    
+
     /**
      * Listar los Atributos de cada Entidad
      */

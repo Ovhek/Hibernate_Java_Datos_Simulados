@@ -7,7 +7,7 @@ package datos;
 import aplicacion.model.Transport;
 
 /**
- * DAO para la clase de transport. Extiende del GenericDAOImpl
+ * DAO para la clase Transport. Extiende del GenericDAOImpl
  */
 public class TransportDAO extends GenericDAOImpl<Transport, Integer>{
     

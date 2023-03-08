@@ -7,7 +7,7 @@ package datos;
 import aplicacion.model.Mecanic;
 
 /**
- * DAO para la clase de mecanic. Extiende del GenericDAOImpl
+ * DAO para la clase Mecanic. Extiende del GenericDAOImpl
  */
 public class MecanicDAO extends GenericDAOImpl<Mecanic, Integer>{
     

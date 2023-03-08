@@ -53,19 +53,19 @@ public interface TesteableEntity {
     
      /***
      * Estableix la dada de l'atribut associat al tipus requerit
-     * @param s
+     * @param f
      */
     void setAtributFloat(Float f);
     
      /***
      * Estableix la dada de l'atribut associat al tipus requerit
-     * @param s
+     * @param d
      */
     void setAtributDate(Date d);
     
      /***
      * Estableix la dada de l'atribut associat al tipus requerit
-     * @param s
+     * @param b
      */
     void setAtributBoolean(Boolean b);
     

@@ -4,7 +4,6 @@
  */
 package utils;
 
-import aplicacion.model.Aeronau;
 import aplicacion.model.Combat;
 import aplicacion.model.Dron;
 import aplicacion.model.Mecanic;

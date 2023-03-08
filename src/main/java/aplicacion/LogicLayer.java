@@ -7,7 +7,6 @@ package aplicacion;
 import datos.GenericDAOImpl;
 
 /**
- *
  * Capa logica, se utiliza para no tener que añadir el atributo dao todo el rato.
  */
 public class LogicLayer {
@@ -22,6 +21,5 @@ public class LogicLayer {
     public LogicLayer(GenericDAOImpl dao) {
         this.dao = dao;
     }
-    
     
 }
