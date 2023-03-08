@@ -7,7 +7,7 @@ package datos;
 import aplicacion.model.Missio;
 
 /**
- * DAO para la clase de missio. Extiende del GenericDAOImpl
+ * DAO para la clase Missio. Extiende del GenericDAOImpl
  */
 public class MissioDAO extends GenericDAOImpl<Missio, Integer>{
     

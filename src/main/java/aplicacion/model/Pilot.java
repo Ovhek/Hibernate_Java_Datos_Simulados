@@ -95,6 +95,4 @@ public class Pilot extends Soldat implements TesteableEntity, Serializable {
         return "Pilot " + super.toStringWithObjects(pilotada.toString());
     }
     
-    
-
 }

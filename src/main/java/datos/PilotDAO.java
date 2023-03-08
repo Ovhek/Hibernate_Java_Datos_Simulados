@@ -7,7 +7,7 @@ package datos;
 import aplicacion.model.Pilot;
 
 /**
- * DAO para la clase de pìlot. Extiende del GenericDAOImpl
+ * DAO para la clase Pìlot. Extiende del GenericDAOImpl
  */
 public class PilotDAO extends GenericDAOImpl<Pilot, Integer>{
     

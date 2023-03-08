@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import presentation.MenuCredenciales;
 
 /**
  * Función de utilidad para crear una sesión de hibernate según los datos

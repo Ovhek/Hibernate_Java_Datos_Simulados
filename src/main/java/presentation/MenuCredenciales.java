@@ -7,7 +7,6 @@ package presentation;
 import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.SessionFactory;
 import utils.HibernateUtils;
 
 /**
@@ -21,15 +20,14 @@ public abstract class MenuCredenciales {
     private static final Logger logger = LogManager.getLogger(HibernateUtils.class);
     
     /**
-     * Inicializa el menú preguntado las credenciales. Si son correctas se genera la sessión de Hibernate.
-     * @return Factoría de sesión de hibernate.
+     * Inicializa el menú preguntado las credenciales.Si son correctas se genera la sessión de Hibernate.
      */
     public static void init(){
         try {
             Scanner sc = new Scanner(System.in);
             System.out.println("Introduce el nombre de la BBDD: ");
             String database = sc.nextLine();
-            System.out.println("Introduece el usuario de la BBDD: ");
+            System.out.println("Introduce el usuario de la BBDD: ");
             String username = sc.nextLine();
             System.out.println("Introduce la contrasenya de la BBDD: ");
             String password = sc.nextLine();

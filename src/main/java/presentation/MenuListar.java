@@ -6,10 +6,8 @@ package presentation;
 
 import static aplicacion.ListarLogic.listarEntidadFiltrada;
 import static aplicacion.ListarLogic.listarEntidades;
-import jakarta.persistence.metamodel.EntityType;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
-import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -22,14 +20,19 @@ import utils.SingleSession;
  * @author ivan
  */
 public class MenuListar {
-
-    private static final Logger logger = LogManager.getLogger(HibernateUtils.class);
-    private static Session ss = SingleSession.getInstance().getSessio();
-
-    public static void menuListar() throws ClassNotFoundException, NoSuchMethodException, NoSuchMethodException, InstantiationException, InstantiationException, IllegalAccessException, InvocationTargetException, InvocationTargetException {
+    
+    /**
+     * Menú que devuelve las entidades que desea listar el usuario, filtradas por un rango de id's
+     * @throws ClassNotFoundException
+     * @throws NoSuchMethodException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException 
+     */
+    public static void menuListar() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Indica qué entidades quieres listar:");
+        System.out.println("\nIndica qué entidades quieres listar:");
         listarEntidades();
         String entrada = sc.nextLine();
         System.out.println("Indica el id inicial:");

@@ -7,7 +7,7 @@ package datos;
 import aplicacion.model.Dron;
 
 /**
- * DAO para la clase de dron. Extiende del GenericDAOImpl
+ * DAO para la clase Dron. Extiende del GenericDAOImpl
  */
 public class DronDAO extends GenericDAOImpl<Dron, Integer>{
     

@@ -4,7 +4,6 @@
  */
 package datos;
 
-import jakarta.persistence.EntityManager;
 import java.io.Serializable;
 import java.util.ArrayList;
 import org.hibernate.Session;
@@ -39,6 +38,7 @@ public abstract class GenericDAOImpl<Entidad, ID extends Serializable> implement
         return SingleSession.getInstance().getSessio();
     }
 
+    @Override
     public void guardar(Entidad entidad) {
         Session session = getSession();
         Transaction tx = null;
@@ -58,6 +58,7 @@ public abstract class GenericDAOImpl<Entidad, ID extends Serializable> implement
         }
     }
 
+    @Override
     public void actualizar(Entidad entidad) {
         Session session = getSession();
         Transaction tx = null;
@@ -75,6 +76,7 @@ public abstract class GenericDAOImpl<Entidad, ID extends Serializable> implement
         }
     }
 
+    @Override
     public void eliminar(Entidad entidad) {
         Session session = getSession();
         Transaction tx = null;
@@ -92,6 +94,7 @@ public abstract class GenericDAOImpl<Entidad, ID extends Serializable> implement
         }
     }
 
+    @Override
     public Entidad obtener(ID id) {
         Session session = getSession();
         try {
@@ -105,6 +108,7 @@ public abstract class GenericDAOImpl<Entidad, ID extends Serializable> implement
         }
     }
 
+    @Override
     public ArrayList<Entidad> obtenerTodos() {
         Session session = getSession();
         try {
@@ -117,5 +121,4 @@ public abstract class GenericDAOImpl<Entidad, ID extends Serializable> implement
             session.close();
         }
     }
-
 }

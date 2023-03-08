@@ -24,7 +24,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.metamodel.model.domain.internal.SingularAttributeImpl;
 import utils.HibernateUtils;
-import utils.JavaFaker;
 import utils.SingleSession;
 
 /**
@@ -57,14 +56,7 @@ public class ListarLogic {
      */
     public static void listarEntidadFiltrada(String entidad, int idInicial, int idFinal) {
         try {            
-            /*Pilot p = JavaFaker.generarPilot();
-            ss.beginTransaction();
-            ss.persist(p);
-
-            Mecanic m = JavaFaker.generarMecanic();
-            ss.persist(m);
-            ss.getTransaction().commit();*/
-
+            
             switch (entidad) {
 
                 case "Pilot":
