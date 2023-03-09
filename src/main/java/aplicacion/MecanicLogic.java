@@ -9,8 +9,8 @@ import datos.MecanicDAO;
 import java.util.ArrayList;
 
 /**
- *
- * @author Cole
+ * Clase que presenta la capa logica de Mecanic.
+ * @author Alex
  */
 public class MecanicLogic extends LogicLayer{
     

@@ -104,6 +104,11 @@ public class ClassFactory implements TesteableFactory {
     public ClassFactory() {
     }
 
+    /**
+     * Función que devuelve una nave del tipo de clase especificada.
+     * @param tipus tipo de nave
+     * @return Aeronave de ese tipo.
+     */
     @Override
     public Aeronau aeronauFactory(Class<?> tipus) {
         Aeronau aeronau = null;
@@ -117,6 +122,11 @@ public class ClassFactory implements TesteableFactory {
         return aeronau;
     }
 
+    /**
+     * Función que genera y devuelve un listado de soldados.
+     * @param elements número de soldados a generar.
+     * @return lista con el numero de soldados.
+     */
     @Override
     public List<Soldat> mecanicsFactory(int elements) {
         List<Soldat> lista = new ArrayList<>();

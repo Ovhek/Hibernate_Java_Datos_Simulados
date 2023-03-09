@@ -9,8 +9,8 @@ import datos.MissioDAO;
 import java.util.ArrayList;
 
 /**
- *
- * @author Cole
+ * Clase que presenta la capa logica de Missio.
+ * @author Alex
  */
 public class MissioLogic extends LogicLayer{
     

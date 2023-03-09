@@ -9,8 +9,8 @@ import datos.DronDAO;
 import java.util.ArrayList;
 
 /**
- *
- * @author Cole
+ * Clase que presenta la capa logica de Dron.
+ * @author Alex
  */
 public class DronLogic extends LogicLayer{
     

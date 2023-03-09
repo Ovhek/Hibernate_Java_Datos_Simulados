@@ -34,8 +34,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- *
- * @author Cole
+ * Clase que representa al Menu de Generar Entidades.
+ * @author Alex
  */
 public abstract class MenuGenerar {
 
@@ -49,9 +49,12 @@ public abstract class MenuGenerar {
     private static final Logger logger = LogManager.getLogger(MenuPrincipal.class);
     private static Scanner sc = new Scanner(System.in);
 
+    /**
+     * Función que inicializa el menú
+     */
     public static void init() {
         try {
-            System.out.println("\nMenú de Generación de Clases");
+            System.out.println("\nMenú de Generación de Clases (escribe el número correspondiente a tu elección)");
             System.out.println("1. Generar Clase");
             System.out.println("2. Volver");
             System.out.println("3. Salir");
@@ -82,11 +85,14 @@ public abstract class MenuGenerar {
         }
     }
 
+    /**
+     * Función encargada de mostrar las clases que se pueden generar, hacer preguntas sobre la generación de clases y generarlas.
+     */
     private static void generarClases() {
         try {
             do {
 
-                System.out.println("\n¿Qué clase quieres generar?");
+                System.out.println("\n¿Qué clase quieres generar? (escribe el número correspondiente a tu elección)");
                 System.out.println("1 - Combat");
                 System.out.println("2 - Transport");
                 System.out.println("3 - Mecanic");

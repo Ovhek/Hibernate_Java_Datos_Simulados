@@ -9,8 +9,8 @@ import datos.TransportDAO;
 import java.util.ArrayList;
 
 /**
- *
- * @author Cole
+ * Clase que presenta la capa logica de Transport.
+ * @author Alex
  */
 public class TransportLogic extends LogicLayer{
     

@@ -28,7 +28,9 @@ public class SingleSession {
      * Función que inicializa la sessión creado una factoria sobre los datos de acceso a la DB
      */
     private void init(){
-        if(HibernateUtils.getInstance().getSessionFactory() == null) HibernateUtils.getInstance().setSetSessionFactory("root", "1234", "test");
+        if(HibernateUtils.getInstance().getSessionFactory() == null){
+            HibernateUtils.getInstance().setSetSessionFactory("root", "1234", "test");
+        }
         factory = HibernateUtils.getInstance().getSessionFactory();
         sessio =  factory.openSession();
     }

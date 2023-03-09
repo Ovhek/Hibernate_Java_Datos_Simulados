@@ -9,8 +9,8 @@ import datos.CombatDAO;
 import java.util.ArrayList;
 
 /**
- *
- * @author Cole
+ * Clase que presenta la capa logica de Combat.
+ * @author Alex
  */
 public class CombatLogic extends LogicLayer{
     

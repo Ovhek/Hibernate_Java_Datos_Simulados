@@ -6,8 +6,11 @@ package datos;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import presentation.MenuPrincipal;
 import utils.SingleSession;
 
 /**
@@ -23,6 +26,9 @@ import utils.SingleSession;
  */
 public abstract class GenericDAOImpl<Entidad, ID extends Serializable> implements GenericDAOInterface<Entidad, ID>{
 
+    
+    private static final Logger logger = LogManager.getLogger(GenericDAOImpl.class);
+        
     //Clase sobre la cual se va a realizar los DAO.
     private Class<Entidad> clase;
 
@@ -38,6 +44,10 @@ public abstract class GenericDAOImpl<Entidad, ID extends Serializable> implement
         return SingleSession.getInstance().getSessio();
     }
 
+    /**
+     * Función a fin de guardar una entidad. Si la entidad ya existe la actualiza.
+     * @param entidad  Entidad a guardar.
+     */
     @Override
     public void guardar(Entidad entidad) {
         Session session = getSession();
@@ -52,12 +62,17 @@ public abstract class GenericDAOImpl<Entidad, ID extends Serializable> implement
             if (tx != null) {
                 tx.rollback();
             }
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } finally {
             session.close();
         }
     }
 
+    
+    /**
+     * Función a fin de actualizar una entidad
+     * @param entidad  Entidad a actualizar.
+     */
     @Override
     public void actualizar(Entidad entidad) {
         Session session = getSession();
@@ -70,12 +85,16 @@ public abstract class GenericDAOImpl<Entidad, ID extends Serializable> implement
             if (tx != null) {
                 tx.rollback();
             }
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } finally {
             session.close();
         }
     }
 
+        /**
+     * Función a fin de eliminar una entidad
+     * @param entidad  Entidad a actualizar.
+     */
     @Override
     public void eliminar(Entidad entidad) {
         Session session = getSession();
@@ -88,12 +107,17 @@ public abstract class GenericDAOImpl<Entidad, ID extends Serializable> implement
             if (tx != null) {
                 tx.rollback();
             }
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } finally {
             session.close();
         }
     }
 
+     /**
+     * Función a fin de opbtener una entidad
+     * @param clase el tipo de entidad.
+     * @param id id de la entidad.
+     */
     @Override
     public Entidad obtener(ID id) {
         Session session = getSession();
@@ -101,13 +125,16 @@ public abstract class GenericDAOImpl<Entidad, ID extends Serializable> implement
             Entidad entidad = session.get(clase, id);
             return entidad;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
             return null;
         } finally {
             session.close();
         }
     }
 
+    /**
+     * Función a fin de obtener todas las entidades
+     */
     @Override
     public ArrayList<Entidad> obtenerTodos() {
         Session session = getSession();
@@ -115,7 +142,7 @@ public abstract class GenericDAOImpl<Entidad, ID extends Serializable> implement
             ArrayList<Entidad> entidades = new ArrayList(session.createQuery("from " + clase.getName(), clase.getClass()).list());
             return entidades;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
             return null;
         } finally {
             session.close();

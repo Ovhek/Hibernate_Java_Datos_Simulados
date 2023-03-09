@@ -8,6 +8,8 @@ import datos.GenericDAOImpl;
 
 /**
  * Capa logica, se utiliza para no tener que añadir el atributo dao todo el rato.
+ * 
+ * @author Alex
  */
 public class LogicLayer {
     

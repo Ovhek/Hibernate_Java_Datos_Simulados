@@ -11,8 +11,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 /**
- * Función de utilidad para crear una sesión de hibernate según los datos
+ * Clase de utilidad para crear una sesión de hibernate según los datos
  * proporcionados por el usuario.
+ * 
+ * @author Alex
  */
 public class HibernateUtils {
     private static final Logger logger = LogManager.getLogger(HibernateUtils.class);

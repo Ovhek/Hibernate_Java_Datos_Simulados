@@ -9,8 +9,8 @@ import datos.PilotDAO;
 import java.util.ArrayList;
 
 /**
- *
- * @author Cole
+ * Clase que presenta la capa logica de Pilot.
+ * @author Alex
  */
 public class PilotLogic extends LogicLayer{
     
