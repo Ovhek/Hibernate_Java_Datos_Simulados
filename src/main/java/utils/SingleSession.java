@@ -29,7 +29,7 @@ public class SingleSession {
      */
     private void init(){
         if(HibernateUtils.getInstance().getSessionFactory() == null){
-            HibernateUtils.getInstance().setSetSessionFactory("root", "1234", "test");
+            HibernateUtils.getInstance().setSetSessionFactory("root", "bermudo22", "test");
         }
         factory = HibernateUtils.getInstance().getSessionFactory();
         sessio =  factory.openSession();
