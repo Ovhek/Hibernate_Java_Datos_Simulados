@@ -45,7 +45,7 @@ public abstract class MenuEliminar {
             try {
                 //Obtenemos por teclado la ocpion del usuario
                 opcion = sc.nextInt();
-                
+                sc.nextLine();
                 //Comprovamos que la opción este dentro del rango disponible 1-7
                 //En caso de dato incorrecto avisamos al usuario por consola
                 //En caso de dato correcto ejecutamos subMenu() siempre que la opcion
@@ -89,9 +89,10 @@ public abstract class MenuEliminar {
             try {
                 System.out.print("Introduzca la id inical: ");
                 id_inicial = sc.nextInt();
+                sc.nextLine();
                 System.out.print("Introduzca la id final: ");
                 id_final = sc.nextInt();
-                
+                sc.nextLine();
                 //Comprovamos que la id sea valida
                 if (id_inicial >= 0 && id_final >= 0 && id_inicial < id_final) {
                     idValida = true;

@@ -30,12 +30,15 @@ import utils.SingleSession;
  */
 public class ListarLogic {
 
-    private static final Session ss = SingleSession.getInstance().getSessio();
+    private static Session ss = SingleSession.getInstance().getSessio();
 
     /**
      * Método que lista todas las Entidades
      */
     public static void listarEntidades() {
+        
+        //abre la session si está cerrada.
+        ss = SingleSession.getInstance().getSessio();
         // Guardar todas las entidades en una lista
         Set<EntityType<?>> entidades = ss.getMetamodel().getEntities();
         for (EntityType<?> entidad : entidades) {
