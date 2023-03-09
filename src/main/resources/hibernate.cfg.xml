@@ -17,5 +17,6 @@
         <mapping class="aplicacion.model.Pilotada"></mapping>
         <mapping class="aplicacion.model.Soldat"></mapping>
         <mapping class="aplicacion.model.Transport"></mapping>
+
     </session-factory>
 </hibernate-configuration>

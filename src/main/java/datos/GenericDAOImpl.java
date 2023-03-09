@@ -6,6 +6,7 @@ package datos;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -113,12 +114,38 @@ public abstract class GenericDAOImpl<Entidad, ID extends Serializable> implement
         }
     }
 
+<<<<<<< src/main/java/datos/GenericDAOImpl.java
+    @Override
+    public void eliminarLista(List<Entidad> lista) {
+        Session session = getSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            lista.forEach(x -> {
+                session.remove(x);
+            });
+            
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+    
+    
+
+=======
      /**
      * Función a fin de opbtener una entidad
      * @param clase el tipo de entidad.
      * @param id id de la entidad.
      */
     @Override
+>>>>>>> src/main/java/datos/GenericDAOImpl.java
     public Entidad obtener(ID id) {
         Session session = getSession();
         try {

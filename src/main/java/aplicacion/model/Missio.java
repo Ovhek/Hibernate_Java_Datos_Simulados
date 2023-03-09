@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -110,6 +111,9 @@ public class Missio implements TesteableEntity, Serializable {
     }
 
     public List<Aeronau> getAeronaus() {
+        if(aeronaus == null){
+            aeronaus = new ArrayList<Aeronau>();
+        }
         return aeronaus;
     }
 
