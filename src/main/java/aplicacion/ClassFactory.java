@@ -26,18 +26,21 @@ public class ClassFactory implements TesteableFactory {
 
     @Override
     public Aeronau addMecanicsToPilotada(List<Soldat> lo, Pilotada p) throws Exception {
-        if(lo.size() < 0 || lo.size() > 2) throw new Exception("El valor debe estar entre 0 y 2");
+        if (lo.size() < 0 || lo.size() > 2) {
+            throw new Exception("El valor debe estar entre 0 y 2");
+        }
         ArrayList<Mecanic> mecanic = new ArrayList<>();
         lo.forEach(e -> {
-            ((Mecanic)e).setPilotada(p);
-            mecanic.add((Mecanic)e);
+            ((Mecanic) e).setPilotada(p);
+            mecanic.add((Mecanic) e);
         });
         p.setMecanics(mecanic);
         return p;
     }
-    
+
     /**
      * Asigna una lista de misiones a una aeronave
+     *
      * @param lm lista de misiones
      * @param a aeronave a le que asignamos las misiones
      * @return devuele la aeronave con las misiones asignadas
@@ -51,11 +54,7 @@ public class ClassFactory implements TesteableFactory {
         // En caso de que la mision tenga mas de 8, se elimina de la lista,
         //en caso contrario se le asigna la aeronave
         lm.forEach(m -> {
-            //Si aeronaves es null se setean.
-            if(m.getAeronaus() == null) {
-                ArrayList<Aeronau> aeronaus = new ArrayList<>();
-                m.setAeronaus(aeronaus);
-            }
+
             if (m.getAeronaus().size() > 7) {
                 lm.remove(m);
             } else {
@@ -79,7 +78,7 @@ public class ClassFactory implements TesteableFactory {
             while (missions.size() > 2) {
                 missions.get(0).getAeronaus().remove(a);
                 missions.remove(0);
-                
+
             }
         } else {
             //Como la lista no existe, simplemente le asigno la lista lm
@@ -91,6 +90,47 @@ public class ClassFactory implements TesteableFactory {
 
     @Override
     public Missio addAeronausToMissio(List<Aeronau> la, Missio m) throws Exception {
+        // Recorro la lista de aeronaves la, comprovando que cada aeronave tenga
+        // menos de 2 misiones asignadas:
+        // En caso de que la aeronave tenga mas de 2, se elimina de la lista,
+        //en caso contrario se le asigna la mision
+        la.forEach(a -> {
+            if (a.getMissions().size() > 1) {
+                la.remove(a);
+            } else {
+                a.getMissions().add(m);
+            }
+        });
+
+        //Compruevo que la lista de aeronaves de la mision exista
+        if (m.getAeronaus() != null) {
+
+            //Obtenemos la lista de aeronaves de la mision
+            ArrayList<Aeronau> aeronaus = (ArrayList<Aeronau>) m.getAeronaus();
+
+            //Comprovamos que la lista de aeronaves la no tenga mas de 8
+            //En caso de que tenga mas de dos, salta una exception y la operacion
+            //se cancela
+            if (la.size() > 8) {
+                throw new Exception("Como maximo se pueden asignar 8 aeronaves a la mision");
+            }
+
+            //Anyadimos la lista la a la lista de aeronaves de la mision
+            aeronaus.addAll(la);
+
+            //Vamos eliminando la primera aeronave de la lista de aeronaves 
+            //de la mision hasta que queden solo 8 aeronaves.
+            //tambien eliminamos de la aeronave(eliminada) de la mision
+            while (aeronaus.size() > 8) {
+                aeronaus.get(0).getMissions().remove(m);
+                aeronaus.remove(0);
+
+            }
+        } else {
+            //Como la lista no existe, simplemente le asigno la lista lm
+            m.setAeronaus(la);
+        }
+
         return m;
     }
 
@@ -164,19 +204,21 @@ public class ClassFactory implements TesteableFactory {
         Random rnd = new Random();
         int rand = rnd.nextInt(2);
         Pilotada pilotada = null;
-        
-        if(rand == 0) pilotada = JavaFaker.generarCombat();
-        else pilotada = JavaFaker.generarTransport();
-        
-        
+
+        if (rand == 0) {
+            pilotada = JavaFaker.generarCombat();
+        } else {
+            pilotada = JavaFaker.generarTransport();
+        }
+
         Soldat soldat = null;
         if (tipus.equals(Mecanic.class)) {
             soldat = JavaFaker.generarMecanic();
-            ((Mecanic)soldat).setPilotada(pilotada);
+            ((Mecanic) soldat).setPilotada(pilotada);
         } else if (tipus.equals(Pilot.class)) {
             soldat = JavaFaker.generarPilot();
         }
-        
+
         return soldat;
     }
 

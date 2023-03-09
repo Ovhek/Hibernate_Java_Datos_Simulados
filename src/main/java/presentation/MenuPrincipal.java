@@ -41,7 +41,7 @@ public abstract class MenuPrincipal {
                     MenuGenerar.init();
                     break;
                 case 2:
-                    //TODO: Llamar al menu de eliminar
+                    MenuEliminar.mostrar();
                     break;
                 case 3:
                     menuListar();

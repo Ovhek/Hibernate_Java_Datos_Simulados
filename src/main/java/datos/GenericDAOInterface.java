@@ -6,6 +6,7 @@ package datos;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -46,4 +47,10 @@ public interface GenericDAOInterface<Entidad, ID extends Serializable> {
      * @param entidad Entidad a eliminar.
      */
     public void eliminar(Entidad entidad);
+    
+    /**
+     * Funcion encargada de eliminar una lista de entidades
+     * @param lista Lista de entidades a eliminar
+     */
+    public void eliminarLista(List<Entidad> lista);
 }
