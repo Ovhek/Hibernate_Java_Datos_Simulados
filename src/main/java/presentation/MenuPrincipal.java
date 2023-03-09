@@ -25,7 +25,7 @@ public abstract class MenuPrincipal {
         try {
             Scanner sc = new Scanner(System.in);
             
-            System.out.println("Selecciona una de las siguiente opciones sobre las clases: ");
+            System.out.println("\nSelecciona una de las siguiente opciones sobre las clases: ");
             System.out.println("1. Generar Clases");
             System.out.println("2. Eliminar Clases");
             System.out.println("3. Listar Clases");

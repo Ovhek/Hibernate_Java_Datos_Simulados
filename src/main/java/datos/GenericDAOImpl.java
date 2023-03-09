@@ -114,7 +114,10 @@ public abstract class GenericDAOImpl<Entidad, ID extends Serializable> implement
         }
     }
 
-<<<<<<< src/main/java/datos/GenericDAOImpl.java
+    /**
+     * Elimina una lista de entidades
+     * @param lista lista de entidades a eliminar.
+     */
     @Override
     public void eliminarLista(List<Entidad> lista) {
         Session session = getSession();
@@ -137,15 +140,12 @@ public abstract class GenericDAOImpl<Entidad, ID extends Serializable> implement
     }
     
     
-
-=======
      /**
      * Función a fin de opbtener una entidad
      * @param clase el tipo de entidad.
      * @param id id de la entidad.
      */
     @Override
->>>>>>> src/main/java/datos/GenericDAOImpl.java
     public Entidad obtener(ID id) {
         Session session = getSession();
         try {

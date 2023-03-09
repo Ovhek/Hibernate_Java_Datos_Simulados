@@ -32,7 +32,7 @@ public abstract class MenuEliminar {
         
         //Un bucle que se repite hasta que no se selecciona la opcion 7 (volver)
         while (opcion != 7) {
-            System.out.println("****ELIMINAR ENTIDADES");
+            System.out.println("\n****ELIMINAR ENTIDADES");
             System.out.println("---ENTIDADES---");
             System.out.println("1. Combat");
             System.out.println("2. Transport");
@@ -57,6 +57,7 @@ public abstract class MenuEliminar {
                         //Llamamos al menu que pedira las ids
                         subMenu(opcion);
                     }
+                    else MenuPrincipal.init();
                 }
             } catch (Exception e) {
                 //En caso de que el usuario introduza una opcion de formato incorrecto

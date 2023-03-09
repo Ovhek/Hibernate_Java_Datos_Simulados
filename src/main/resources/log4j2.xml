@@ -21,7 +21,7 @@
     
         <!-- Hibernate -->
         <Logger name="org.hibernate" level="erro" additivity="false">
-            <AppenderRef ref="HibernateConsole" />   
+            <AppenderRef ref="Console" />   
         </Logger>
     
         <!-- Lo demás -->

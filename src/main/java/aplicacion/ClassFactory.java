@@ -82,6 +82,7 @@ public class ClassFactory implements TesteableFactory {
             }
         } else {
             //Como la lista no existe, simplemente le asigno la lista lm
+            if(lm.size() > 2) throw new Exception("No pueden haber más de dos misiones a la vez.");
             a.setMissions(lm);
         }
 

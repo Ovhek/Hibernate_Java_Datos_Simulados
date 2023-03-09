@@ -47,6 +47,7 @@ public class MenuListar {
             System.out.println("Indica el id final:");
             int idFinal = sc.nextInt();
 
+            entrada = entrada.substring(0,1).toUpperCase() + entrada.substring(1);
             listarEntidadFiltrada(entrada, idInicial, idFinal);
             System.out.println();
             init();

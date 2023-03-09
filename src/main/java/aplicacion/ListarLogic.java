@@ -58,9 +58,9 @@ public class ListarLogic {
                 throw new Exception("idInicial debe ser menor o igual a idFinal");
             }
 
-            switch (entidad) {
+            switch (entidad.toLowerCase()) {
 
-                case "Pilot":
+                case "pilot":
 
                     // Buscar los registros de la tabla de Pilot
                     List<Pilot> llistaPilot = ss.createQuery("from " + entidad, Pilot.class).list();
@@ -83,7 +83,7 @@ public class ListarLogic {
                     }*/
                     break;
 
-                case "Aeronau":
+                case "aeronau":
 
                     // Buscar los registros de la tabla de Aeronau y sus Entidades "hijas"
                     List<Aeronau> llistaAeronau = ss.createQuery("from " + entidad, Aeronau.class).list();
@@ -106,7 +106,7 @@ public class ListarLogic {
                     }*/
                     break;
 
-                case "Dron":
+                case "dron":
 
                     // Buscar los registros de la tabla de Dron
                     List<Dron> llistaDron = ss.createQuery("from " + entidad, Dron.class).list();
@@ -129,7 +129,7 @@ public class ListarLogic {
                     }*/
                     break;
 
-                case "Soldat":
+                case "soldat":
 
                     // Buscar los registros de la tabla de Soldat y sus Entidades "hijas"
                     List<Soldat> llistaSoldat = ss.createQuery("from " + entidad, Soldat.class).list();
@@ -152,7 +152,7 @@ public class ListarLogic {
                     }*/
                     break;
 
-                case "Mecanic":
+                case "mecanic":
 
                     // Buscar los registros de la tabla de Mecanic
                     List<Mecanic> llistaMecanic = ss.createQuery("from " + entidad, Mecanic.class).list();
@@ -175,7 +175,7 @@ public class ListarLogic {
                     }*/
                     break;
 
-                case "Transport":
+                case "transport":
 
                     // Buscar los registros de la tabla de Transport
                     List<Transport> llistaTransport = ss.createQuery("from " + entidad, Transport.class).list();
@@ -198,7 +198,7 @@ public class ListarLogic {
                     }*/
                     break;
 
-                case "Combat":
+                case "combat":
 
                     // Buscar los registros de la tabla de Combat
                     List<Combat> llistaCombat = ss.createQuery("from " + entidad, Combat.class).list();
@@ -220,7 +220,7 @@ public class ListarLogic {
                     }*/
                     break;
 
-                case "Missio":
+                case "missio":
                     // Buscar los registros de la tabla de Missio
                     List<Missio> llistaMissio = ss.createQuery("from " + entidad, Missio.class).list();
 
@@ -241,7 +241,7 @@ public class ListarLogic {
                     }*/
                     break;
 
-                case "Autonoma":
+                case "autonoma":
 
                     // Buscar los registros de la tabla de Autonoma y sus Entidades "hijas"
                     List<Autonoma> llistaAutonoma = ss.createQuery("from " + entidad, Autonoma.class).list();
@@ -264,7 +264,7 @@ public class ListarLogic {
                     }*/
                     break;
 
-                case "Pilotada":
+                case "pilotada":
 
                     // Buscar los registros de la tabla de Pilotada y sus Entidades "hijas"
                     List<Pilotada> llistaPilotada = ss.createQuery("from " + entidad, Pilotada.class).list();
