@@ -34,6 +34,7 @@ public abstract class MenuPrincipal {
             int option = -1;
             
             if(sc.hasNextInt()) option = sc.nextInt();
+            sc.nextLine();
             
             switch (option) {
                 case 1:
