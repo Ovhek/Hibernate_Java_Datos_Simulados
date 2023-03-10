@@ -30,7 +30,7 @@ import utils.SingleSession;
  */
 public class EliminarLogic {
 
-    private static final Session sesion = SingleSession.getInstance().getSessio();
+    private static Session sesion = SingleSession.getInstance().getSessio();
     private static final Logger logger = LogManager.getLogger(HibernateUtils.class);
     
     /**
@@ -40,6 +40,7 @@ public class EliminarLogic {
      * @param id_final  id final del rango
      */
     public void eliminar(int opcion, int id_inicial, int id_final) {
+        sesion = SingleSession.getInstance().getSessio();
         logger.info("Eliminando los registros...");
 
         switch (opcion) {
